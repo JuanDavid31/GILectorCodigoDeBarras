@@ -53,11 +53,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
+
+        if(intent == null) return;
+        if(intent.getBooleanExtra(REFRESCAR_DATOS, false)) realizarConsulta();
+        /*
         if(intent != null){
             if(intent.getBooleanExtra(REFRESCAR_DATOS, false)){
                 realizarConsulta();
             }
         }
+        */
     }
 
     public static void ocultarLista(){
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        public Cursor darProductos(){
+        private Cursor darProductos(){
             SQLiteDatabase db = asistente.getReadableDatabase();
             return db.query(ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA,
                     null,
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     null);
         }
 
-        public Cursor darProducto(int id){
+        private Cursor darProducto(int id){
             SQLiteDatabase db = asistente.getReadableDatabase();
             return db.query(ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA,
                     null,
