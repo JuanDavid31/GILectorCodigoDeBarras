@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +21,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorBD;
 import lector.gi.unibague.gilectorcodigodebarras.provider.AsistenteLectorCodigoDeBarras;
 import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static TextView tvInformacion;
     private static ProgressBar pbBarraProgreso;
     private static RecyclerView rvListaProductos;
+    public final static int LOADER_CONSULTOR_DB = 11;
 
     public final static String REFRESCAR_DATOS = "Refrescas datos";
 
@@ -46,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void realizarConsulta(){
         ocultarLista();
-        new ConsultorDB(rvListaProductos).execute(0);
+        //new ConsultorDB(rvListaProductos).execute(0);
+        getSupportLoaderManager().initLoader(LOADER_CONSULTOR_DB, null, this);
     }
 
     @Override
@@ -101,7 +109,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class ConsultorDB extends AsyncTask<Integer, Void, Cursor>{
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new ConsultorBD(this, args);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+        rvListaProductos.setAdapter(new AdaptadorProducto(cursor));
+        if(cursor.getCount() == 0){
+            mostrarTexto();
+        }else{
+            mostrarLista();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
+    }
+
+/*    public class ConsultorDB extends AsyncTask<Integer, Void, Cursor>{
 
         private final AsistenteLectorCodigoDeBarras asistente = new AsistenteLectorCodigoDeBarras(MainActivity.this);
         RecyclerView rv;
@@ -151,5 +180,5 @@ public class MainActivity extends AppCompatActivity {
                     null);
         }
 
-    }
+    } */
 }
