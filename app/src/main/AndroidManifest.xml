@@ -29,7 +29,8 @@
             android:value="barcode" />
 
         <activity android:name=".EscaneoActivity" />
-        <activity android:name=".AdicionProductoActivity"></activity>
+        <activity android:name=".AdicionProductoActivity" />
+        <activity android:name=".CompraActivity"></activity>
     </application>
 
 </manifest>

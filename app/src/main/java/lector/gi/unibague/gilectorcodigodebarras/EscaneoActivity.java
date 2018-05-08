@@ -3,6 +3,7 @@ package lector.gi.unibague.gilectorcodigodebarras;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -19,9 +19,18 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
-public class EscaneoActivity extends AppCompatActivity {
+import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorBD;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
+import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
+
+public class EscaneoActivity extends AppCompatActivity implements IPostLoaderConsulta {
 
     SurfaceView camara;
+
+    private static Barcode codigoActual;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +91,38 @@ public class EscaneoActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> objetosDetectados = detections.getDetectedItems();
-                if(objetosDetectados.size() > 0){
-                    Log.d("Detector", "Coño! hemos detectado algo: " + objetosDetectados.get(0) );
+                if(objetosDetectados.size() > 0) {
+                    Log.d("Detector", "Coño! hemos detectado algo: " + objetosDetectados.get(0));
                     Barcode barcode = objetosDetectados.valueAt(0);
-                    Intent i = new Intent(EscaneoActivity.this, AdicionProductoActivity.class);
-                    i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO, barcode);
-                    startActivity(i);
+                    EscaneoActivity.codigoActual = barcode;
+                    Bundle b = new Bundle();
+                    b.putInt(ConsultorBD.X, Integer.parseInt(barcode.toString()));
+                    getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_DB, b, AdminSingletons.darInstancia(EscaneoActivity.this));
                 }
             }
         });
     }
 
 
+    @Override
+    public void accionPostLoaderConsulta(Cursor cursor) {
+        Intent i;
+        if(cursor.getCount() == 0){
+            i = new Intent(this, AdicionProductoActivity.class);
+        }else{
+            i = new Intent(this, CompraActivity.class); //TODO: Debería pasar un objeto tipo producto
+            i.putExtra(CompraActivity.PRODUCTO_A_VENDER, darProducto(cursor));
+        }
+        startActivity(i);
+    }
+
+    private Producto darProducto(Cursor cursor){
+        cursor.moveToFirst();
+
+        int id = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto._ID));
+        String nombre = cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE));
+        int cantidad = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD));
+
+        return new Producto(id, nombre, cantidad);
+    }
 }
