@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
 
     private ArrayList<Producto> productos;
 
-    public AdaptadorProductoEnCompra(ArrayList productos){
+    public AdaptadorProductoEnCompra(ArrayList productos) {
         this.productos = productos;
     }
 
@@ -34,8 +35,9 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
     @Override
     public void onBindViewHolder(@NonNull AdaptadorProductoEnCompra.ViewHolder holder, int position) {
         Producto producto = productos.get(position); //TODO: Añadirle las variables al holder
-//        holder.tvNombreProducto.setText(cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE)));
-//        holder.tvCantidadProducto.setText(cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD)) + "");
+        holder.tvCantidadAVender.setText(1 + "");
+        holder.tvNombreProducto.setText(producto.getNombre());
+        holder.tvPrecioUnitario.setText(producto.getPrecio() + "");
     }
 
     @Override
@@ -45,11 +47,17 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
 
     public class ViewHolder  extends  RecyclerView.ViewHolder{
 
-        //TODO: Variables para añadir: cantidadAVender, nombreProducto, precio ( No sé si unitario o en total), el boton de opciones
-
+        private TextView tvCantidadAVender;
+        private TextView tvNombreProducto;
+        private TextView tvPrecioUnitario;
+        private TextView tvOpciones;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tvCantidadAVender = itemView.findViewById(R.id.tv_cantidad_producto_en_compra);
+            tvNombreProducto = itemView.findViewById(R.id.tv_nombre_producto_en_compra);
+            tvPrecioUnitario = itemView.findViewById(R.id.tv_precio_unitario_producto_en_compra);
+            tvOpciones = itemView.findViewById(R.id.tv_opciones_producto_en_compra);
         }
     }
 }

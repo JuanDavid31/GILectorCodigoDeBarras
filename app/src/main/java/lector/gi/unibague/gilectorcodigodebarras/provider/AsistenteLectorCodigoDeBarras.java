@@ -21,39 +21,47 @@ public class AsistenteLectorCodigoDeBarras extends SQLiteOpenHelper {
                 ContratoLectorCodigoDeBarras.Cliente.COLUMNA_NOMBRE + " TEXT ); ";
 
         String sqlCompra = "CREATE TABLE " + ContratoLectorCodigoDeBarras.Compra.NOMBRE_TABLA + "( " +
-                ContratoLectorCodigoDeBarras.Compra._ID + " INTEGER AUTOINCREMENT PRIMARY KEY, " +
+                ContratoLectorCodigoDeBarras.Compra._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ContratoLectorCodigoDeBarras.Compra.COLUMNA_CEDULA + " INTEGER, " +
-                ContratoLectorCodigoDeBarras.Compra.COLUMNA_FECHA + "TEXT );";
-
-        String sqlCompraProducto = "CREATE TABLE " + ContratoLectorCodigoDeBarras.CompraProducto.NOMBRE_TABLA + "( " +
-                ContratoLectorCodigoDeBarras.CompraProducto._ID + " INTEGER AUTOINCREMENT PRIMARY KEY," +
-                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_COMPRA + " INTEGER, " +
-                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_PRODUCTO + " INTEGER," +
-                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CANTIDAD_VENDIDA + " INTEGER );" ;
+                ContratoLectorCodigoDeBarras.Compra.COLUMNA_FECHA + " TEXT, " +
+                "FOREIGN KEY(" + ContratoLectorCodigoDeBarras.Compra.COLUMNA_CEDULA + ") " +
+                "REFERENCES " + ContratoLectorCodigoDeBarras.Cliente.NOMBRE_TABLA + "(" +
+                ContratoLectorCodigoDeBarras.Cliente._ID + ") ON DELETE CASCADE); ";
 
         String sqlProducto = "CREATE TABLE " + ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA + "( " +
                 ContratoLectorCodigoDeBarras.Producto._ID + " INTEGER PRIMARY KEY, " +
                 ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE + " TEXT, " +
-                ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD + " INTEGER );";
+                ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD + " INTEGER, " +
+                ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO + "INTEGER );";
+
+        String sqlCompraProducto = "CREATE TABLE " + ContratoLectorCodigoDeBarras.CompraProducto.NOMBRE_TABLA + "( " +
+                ContratoLectorCodigoDeBarras.CompraProducto._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_COMPRA + " INTEGER, " +
+                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_PRODUCTO + " INTEGER, " +
+                ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CANTIDAD_VENDIDA + " INTEGER, " +
+                " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_COMPRA + ") " +
+                "REFERENCES " + ContratoLectorCodigoDeBarras.Compra.NOMBRE_TABLA + "(" +
+                ContratoLectorCodigoDeBarras.Compra._ID + ") ON DELETE CASCADE, " +
+                " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_PRODUCTO + ") " +
+                "REFERENCES " + ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA + "(" +
+                ContratoLectorCodigoDeBarras.Producto._ID + ") ON DELETE CASCADE); ";
 
         String sqlAlteracionCompra = " ALTER TABLE " + ContratoLectorCodigoDeBarras.Compra.NOMBRE_TABLA +
                 "ADD CONSTRAINT fk_cliente " + " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.Compra.COLUMNA_CEDULA + ") " +
                  "REFERENCES " + ContratoLectorCodigoDeBarras.Cliente.NOMBRE_TABLA + "(" + ContratoLectorCodigoDeBarras.Cliente._ID + ") ON DELETE CASCADE;";
 
         String sqlAlteracionCompraProducto1 = " ALTER TABLE " + ContratoLectorCodigoDeBarras.CompraProducto.NOMBRE_TABLA +
-                "ADD CONSTRAINT fk_compra " + " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_COMPRA + ") " +
+                " ADD CONSTRAINT fk_compra " + " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_COMPRA + ") " +
                 "REFERENCES " + ContratoLectorCodigoDeBarras.Compra.NOMBRE_TABLA + "(" + ContratoLectorCodigoDeBarras.Compra._ID + ") ON DELETE CASCADE;";
 
         String sqlAlteracionCompraProducto2 = " ALTER TABLE " + ContratoLectorCodigoDeBarras.CompraProducto.NOMBRE_TABLA +
-                "ADD CONSTRAINT fk_producto " + " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_PRODUCTO + ") " +
+                " ADD CONSTRAINT fk_producto " + " FOREIGN KEY(" + ContratoLectorCodigoDeBarras.CompraProducto.COLUMNA_CODIGO_PRODUCTO + ") " +
                 "REFERENCES " + ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA + "(" + ContratoLectorCodigoDeBarras.Producto._ID + ") ON DELETE CASCADE;";
 
         sqLiteDatabase.execSQL(sqlCliente);
         sqLiteDatabase.execSQL(sqlCompra);
         sqLiteDatabase.execSQL(sqlProducto);
         sqLiteDatabase.execSQL(sqlCompraProducto);
-        sqLiteDatabase.execSQL(sqlAlteracionCompraProducto1);
-        sqLiteDatabase.execSQL(sqlAlteracionCompraProducto2);
     }
 
     @Override

@@ -32,6 +32,7 @@ public class ContratoLectorCodigoDeBarras {
         public final static String NOMBRE_TABLA = "GI_PRODUCTO";
         public final static String COLUMNA_NOMBRE = "d_nombre";
         public final static String COLUMNA_CANTIDAD = "n_cantidad";
+        public final static String COLUMNA_PRECIO_UNITARIO = "n_precio_unitario";
 
     }
 }

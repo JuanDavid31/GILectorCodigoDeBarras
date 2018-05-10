@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,11 +35,10 @@ public class CompraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compra);
-        cargarRecyclerView(); //TODO: Esto debe ir despues de onStart()
     }
 
     public void cargarRecyclerView(){
-        rvListaProductos = findViewById(R.id.rv_recycler_view);
+        rvListaProductos = findViewById(R.id.rv_recycler_view_compra);
         rvListaProductos.setHasFixedSize(true);
         rvListaProductos.setLayoutManager(new LinearLayoutManager(this));
         rvListaProductos.setAdapter(new AdaptadorProductoEnCompra(productos));
@@ -49,6 +49,7 @@ public class CompraActivity extends AppCompatActivity {
         super.onStart();
         cargarProductos();
         adicionarNuevoProducto();
+        cargarRecyclerView(); //TODO: Esto debe ir despues de onStart()
     }
 
     public void cargarProductos(){
@@ -103,6 +104,16 @@ public class CompraActivity extends AppCompatActivity {
             if(p.getCodigo() == producto.getCodigo()) return true;
         }
         return false;
+    }
+
+    public void agregarProducto(View v){
+        Intent i = new Intent(this, EscaneoActivity.class);
+        startActivity(i);
+    }
+
+    public void comprar(View v){
+        Intent i = new Intent(this, FacturaActivity.class);
+        startActivity(i);
     }
 
     @Override

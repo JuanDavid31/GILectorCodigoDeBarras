@@ -12,18 +12,20 @@ import android.support.v4.content.Loader;
  * Created by Juan David on 4/05/2018.
  */
 
-public class CargadorConsultorBD implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CargadorConsultorProductosBD implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private IPostLoaderConsulta ipl;
+    private Context context;
 
-    public CargadorConsultorBD(IPostLoaderConsulta ipl){
+    public CargadorConsultorProductosBD(IPostLoaderConsulta ipl, Context context){
         this.ipl = ipl;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) { //TODO: args lo mismo a que se inicialize en el constructor ?
-        return new ConsultorBD((Context)args.get("contexto"), args);
+        return new ConsultorProductosBD(context, args);
     }
 
     @Override

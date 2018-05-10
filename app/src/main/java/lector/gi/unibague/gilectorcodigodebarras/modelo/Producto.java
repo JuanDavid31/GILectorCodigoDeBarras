@@ -12,10 +12,13 @@ public class Producto implements Serializable{
     private String nombre;
     private int cantidad;
 
-    public Producto(int codigo, String nombre, int cantidad) {
+    private int precio;
+
+    public Producto(int codigo, String nombre, int cantidad, int preci) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public int getCodigo() {
@@ -40,5 +43,13 @@ public class Producto implements Serializable{
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 }

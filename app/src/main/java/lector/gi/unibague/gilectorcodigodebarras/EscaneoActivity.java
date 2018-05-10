@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorBD;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorProductosBD;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
 import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
 
@@ -96,8 +96,8 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
                     Barcode barcode = objetosDetectados.valueAt(0);
                     EscaneoActivity.codigoActual = barcode;
                     Bundle b = new Bundle();
-                    b.putInt(ConsultorBD.X, Integer.parseInt(barcode.toString()));
-                    getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_DB, b, AdminSingletons.darInstancia(EscaneoActivity.this));
+                    b.putInt(ConsultorProductosBD.X, Integer.parseInt(barcode.toString()));
+                    getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB, b, AdminSingletons.darInstanciaConsultorProductos(EscaneoActivity.this, EscaneoActivity.this));
                 }
             }
         });
@@ -122,7 +122,8 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
         int id = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto._ID));
         String nombre = cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE));
         int cantidad = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD));
+        int precio = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO));
 
-        return new Producto(id, nombre, cantidad);
+        return new Producto(id, nombre, cantidad, precio);
     }
 }
