@@ -23,9 +23,9 @@ public class ContratoLectorCodigoDeBarras {
 
     public final static class CompraProducto implements BaseColumns{
         public final static String NOMBRE_TABLA = "GI_COMPRA_PRODUCTO";
-        public final static String COLUMNA_CODIGO_COMPRA = "C_CODIGO_COMPRA";
-        public final static String COLUMNA_CODIGO_PRODUCTO = "C_CODIGO_PRODUCTO";
-        public final static String COLUMNA_CANTIDAD_VENDIDA = "N_CANTIDAD_VENDIDA";
+        public final static String COLUMNA_CODIGO_COMPRA = "c_codigo_compra";
+        public final static String COLUMNA_CODIGO_PRODUCTO = "c_codigo_producto";
+        public final static String COLUMNA_CANTIDAD_VENDIDA = "n_cantidad_vendida";
     }
 
     public static class Producto implements BaseColumns{

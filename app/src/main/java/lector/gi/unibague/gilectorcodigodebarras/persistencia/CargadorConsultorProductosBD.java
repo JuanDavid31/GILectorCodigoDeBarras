@@ -24,7 +24,7 @@ public class CargadorConsultorProductosBD implements LoaderManager.LoaderCallbac
 
     @NonNull
     @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) { //TODO: args lo mismo a que se inicialize en el constructor ?
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
         return new ConsultorProductosBD(context, args);
     }
 

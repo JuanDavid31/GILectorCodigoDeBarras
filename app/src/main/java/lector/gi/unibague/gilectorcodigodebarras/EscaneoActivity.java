@@ -3,9 +3,11 @@ package lector.gi.unibague.gilectorcodigodebarras;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -25,20 +27,24 @@ import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorProductos
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
 import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
 
-public class EscaneoActivity extends AppCompatActivity implements IPostLoaderConsulta {
+public class EscaneoActivity extends AppCompatActivity implements IPostLoaderConsulta, Runnable {
 
     SurfaceView camara;
 
-    private static Barcode codigoActual;
+    private Long codigoActual;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { Log.i("EscaneoActivity", "onCreate");
         setTitle("Escaner");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scaneo);
         camara = (SurfaceView) findViewById(R.id.sv_escaneo_camara);
         configurarCamara();
+    }
+
+    public void realizarConsulta(){
+        new Handler(Looper.getMainLooper()).post(this);
     }
 
     public void configurarCamara() {
@@ -52,13 +58,6 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 if (ActivityCompat.checkSelfPermission(EscaneoActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                     //TODO: Si no tiene los permisos, entonces se deberían solicitar via ActivityCompat.requestPermissions - https://developer.android.com/training/permissions/requesting.html?hl=es-419#perm-request
                     return;
                 }
@@ -80,50 +79,71 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
                 cameraSource.stop();
             }
         });
-
-        detector.setProcessor(new Detector.Processor<Barcode>() {
-            
-            @Override
-            public void release() {
-                
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                SparseArray<Barcode> objetosDetectados = detections.getDetectedItems();
-                if(objetosDetectados.size() > 0) {
-                    Log.d("Detector", "Coño! hemos detectado algo: " + objetosDetectados.get(0));
-                    Barcode barcode = objetosDetectados.valueAt(0);
-                    EscaneoActivity.codigoActual = barcode;
-                    Bundle b = new Bundle();
-                    b.putInt(ConsultorProductosBD.X, Integer.parseInt(barcode.toString()));
-                    getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB, b, AdminSingletons.darInstanciaConsultorProductos(EscaneoActivity.this, EscaneoActivity.this));
-                }
-            }
-        });
+        detector.setProcessor(new Procesador(this));
     }
 
+    public class Procesador implements Detector.Processor<Barcode> {
+
+        EscaneoActivity escaneoActivity;
+
+        public Procesador(EscaneoActivity e){
+            this.escaneoActivity = e;
+        }
+
+        @Override
+        public void release() {
+
+        }
+
+        @Override
+        public void receiveDetections(Detector.Detections<Barcode> detections) {
+            SparseArray<Barcode> objetosDetectados = detections.getDetectedItems();
+            if(objetosDetectados.size() > 0) { Log.i("EscaneoActivity","receiveDetections");
+                if (escaneoActivity.codigoActual != null)return;
+                Barcode barcode = objetosDetectados.valueAt(0);
+                escaneoActivity.codigoActual =  Long.parseLong(barcode.displayValue);
+                escaneoActivity.realizarConsulta();
+            }
+        }
+
+    }
 
     @Override
     public void accionPostLoaderConsulta(Cursor cursor) {
+        Log.i("EscaneoActivity","Acción post loader consulta");
         Intent i;
         if(cursor.getCount() == 0){
             i = new Intent(this, AdicionProductoActivity.class);
+            i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
         }else{
-            i = new Intent(this, CompraActivity.class); //TODO: Debería pasar un objeto tipo producto
+            i = new Intent(this, CompraActivity.class);
             i.putExtra(CompraActivity.PRODUCTO_A_VENDER, darProducto(cursor));
         }
         startActivity(i);
     }
 
+    @Override
+    public void run() { Log.i("EscaneoActivity", "RUN: Estoy en run");
+        Bundle b = new Bundle();
+        b.putLong(ConsultorProductosBD.CODIGO_PRODUCTO_ACTUAL, codigoActual);
+        getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB,
+                b,
+                AdminSingletons.darInstanciaConsultorProductos(this, EscaneoActivity.this));
+    }
+
     private Producto darProducto(Cursor cursor){
         cursor.moveToFirst();
 
-        int id = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto._ID));
+        Long id = cursor.getLong(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto._ID));
         String nombre = cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE));
         int cantidad = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD));
         int precio = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO));
 
-        return new Producto(id, nombre, cantidad, precio);
+        try {
+            return new Producto(id, nombre, cantidad, precio);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

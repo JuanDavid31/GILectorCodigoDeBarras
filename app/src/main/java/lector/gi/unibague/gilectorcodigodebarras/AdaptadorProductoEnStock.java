@@ -32,7 +32,7 @@ public class AdaptadorProductoEnStock extends RecyclerView.Adapter<AdaptadorProd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        cursor.move(position + 1);
+        cursor.moveToPosition(position);
         holder.tvNombreProducto.setText(cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE)));
         holder.tvCantidadProducto.setText(cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD)) + "");
     }

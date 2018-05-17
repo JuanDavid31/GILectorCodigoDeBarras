@@ -55,17 +55,6 @@ public class FragmentProducos extends Fragment implements IPostLoaderConsulta{
         getLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB, null, AdminSingletons.darInstanciaConsultorProductos(this, getActivity()));
     }
 
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Intent intent = getIntent();
-//
-//        if(intent == null) return; //TODO: intent sera null al iniciar la app?
-//        if(intent.getBooleanExtra(MainActivity.REFRESCAR_DATOS, false)) realizarConsulta();
-//    }
-
     public static void ocultarLista(){
         pbBarraProgreso.setVisibility(View.VISIBLE);
         tvInformacion.setVisibility(View.INVISIBLE);

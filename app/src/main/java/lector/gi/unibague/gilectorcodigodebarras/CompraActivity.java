@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,13 +22,24 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
+import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderEscritura;
 
-public class CompraActivity extends AppCompatActivity {
+public class CompraActivity extends AppCompatActivity implements IPostLoaderEscritura{
 
     public final static String PRODUCTO_A_VENDER = "Producto a vender";
-    private File archivo = new File(getCacheDir(), File.pathSeparator + "productos");
+    public final static String CEDULA_CLIENTE = "Cedula cliente";
+    public final static String CANTIDAD_VENDIDA = "Cantidad vendida";
+    public final static String PRODUCTOS = "Productos";
+    public final static int LOADER_ESCRITOR_CLIENTE = 14;
+    public final static int LOADER_ESCRITOR_COMPRA = 15;
+    public final static int LOADER_ESCRITOR_COMPRA_PRODUCTO = 16;
+    public final static String CODIGO_COMPRA= "Codigo compra";
+    public final static String CODIGO_PRODUCTO = "Codigo producto";
+    private File archivo;
     private ArrayList<Producto> productos;
     private Producto productoActual;
+    private int codigoCompra;
 
     private RecyclerView rvListaProductos;
 
@@ -37,38 +49,39 @@ public class CompraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compra);
     }
 
+    @Override
+    protected void onStart() {
+        setTitle("Compra");
+        super.onStart();
+        cargarProductos(this);
+        adicionarNuevoProducto();
+        cargarRecyclerView();
+    }
+
     public void cargarRecyclerView(){
         rvListaProductos = findViewById(R.id.rv_recycler_view_compra);
         rvListaProductos.setHasFixedSize(true);
         rvListaProductos.setLayoutManager(new LinearLayoutManager(this));
-        rvListaProductos.setAdapter(new AdaptadorProductoEnCompra(productos));
+        rvListaProductos.setAdapter(new AdaptadorProductoEnCompra(productos, this));
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        cargarProductos();
-        adicionarNuevoProducto();
-        cargarRecyclerView(); //TODO: Esto debe ir despues de onStart()
-    }
-
-    public void cargarProductos(){
+    public void cargarProductos(Context context){
+        archivo = new File(context.getCacheDir(), File.pathSeparator + "productos");
         if(!archivo.exists())return;
         FileInputStream fis = null;
         ObjectInputStream  ois = null;
         try {
-            fis = openFileInput(archivo.getPath());
+            fis = new FileInputStream(archivo.getPath());
             ois = new ObjectInputStream(fis);
             productos = (ArrayList<Producto>) ois.readObject();
+            limpiarInputStream(fis);
+            limpiarInputStream(ois);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }finally {
-            limpiarInputStream(fis);
-            limpiarInputStream(ois);
         }
     }
 
@@ -81,7 +94,7 @@ public class CompraActivity extends AppCompatActivity {
     }
 
     public void adicionarNuevoProducto(){
-        Intent i = getIntent(); //TODO: Este intent podra ser null?
+        Intent i = getIntent();
         Producto producto = (Producto) i.getSerializableExtra(PRODUCTO_A_VENDER);
 
         if(producto == null)return;
@@ -101,7 +114,10 @@ public class CompraActivity extends AppCompatActivity {
 
     public boolean estaAgregado(Producto producto){
         for(Producto p : productos){
-            if(p.getCodigo() == producto.getCodigo()) return true;
+            if(p.getCodigo().equals(producto.getCodigo())) {
+                Toast.makeText(this, "Ya esta agregado el producto", Toast.LENGTH_SHORT).show();
+                return true;
+            }
         }
         return false;
     }
@@ -112,14 +128,38 @@ public class CompraActivity extends AppCompatActivity {
     }
 
     public void comprar(View v){
-        Intent i = new Intent(this, FacturaActivity.class);
-        startActivity(i);
+        insertarClienteDummy();
+        insertarCompra();
+        //Sigue en accionPostLoaderEscritura
+    }
+
+    public void insertarClienteDummy(){
+        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_CLIENTE,
+                null,
+                AdminSingletons.darInstanciaEscritorCliente(this)).forceLoad();
+    }
+
+    public void insertarCompra(){
+        Bundle b = new Bundle();
+        b.putInt(CEDULA_CLIENTE,1110582700);
+        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA,
+                b,
+                AdminSingletons.darInstanciaEscritorCompra(this, this)).forceLoad();
+    }
+
+    public void limpiarCache(){
+        archivo.delete();
+        productos = null;
+    }
+
+    public void cambiarCantidadAVender(){
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("Compra Activity","Debo estar guardando algo");
+        Log.i("CompraActivity","Estoy guardando los productos");
         guardarProductos();
     }
 
@@ -129,16 +169,15 @@ public class CompraActivity extends AppCompatActivity {
         ObjectOutputStream ous = null;
 
         try {
-            fos = openFileOutput(archivo.getPath(), Context.MODE_PRIVATE);
+            fos = new FileOutputStream(archivo.getPath());
             ous = new ObjectOutputStream(fos);
             ous.writeObject(productos);
+            limpiarOutputStream(fos);
+            limpiarOutputStream(ous);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            limpiarOutputStream(fos);
-            limpiarOutputStream(ous);
         }
     }
 
@@ -148,5 +187,33 @@ public class CompraActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void accionPostLoaderEscritura(Long l) {
+        codigoCompra = Integer.parseInt(l.toString());
+
+        Intent i = new Intent(this, FacturaActivity.class);
+        for(Producto p: productos){
+            agregarCompraProducto(codigoCompra, p.getCodigo(), p.getCantidadVendida());
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(PRODUCTOS, productos);
+        i.putExtras(bundle);
+
+        limpiarCache();
+
+        startActivity(i);
+    }
+
+    public void agregarCompraProducto(int codigoCompra, Long codigoProducto, int cantidadVendida){
+        Bundle b = new Bundle();
+        b.putInt(CODIGO_COMPRA, codigoCompra);
+        b.putLong(CODIGO_PRODUCTO, codigoProducto);
+        b.putInt(CANTIDAD_VENDIDA, cantidadVendida);
+        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA_PRODUCTO,
+                b,
+                AdminSingletons.darInstanciaEscritorCompraProducto(this)).forceLoad();
     }
 }

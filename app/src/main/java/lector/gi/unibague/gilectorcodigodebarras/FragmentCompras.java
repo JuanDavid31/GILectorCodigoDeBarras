@@ -56,17 +56,10 @@ public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
 
     public void realizarConsulta(){
         ocultarLista();
-        getLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_COMPRAS_DB, null, AdminSingletons.darInstanciaConsultorCompras(this, getActivity()));
+        getLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_COMPRAS_DB,
+                null,
+                AdminSingletons.darInstanciaConsultorCompras(this, getActivity()));
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Intent intent = getIntent();
-//
-//        if(intent == null) return; //TODO: intent sera null al iniciar la app?
-//        if(intent.getBooleanExtra(MainActivity.REFRESCAR_DATOS, false)) realizarConsulta();
-//    }
 
     public static void ocultarLista(){
         pbBarraProgreso.setVisibility(View.VISIBLE);
@@ -88,7 +81,7 @@ public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
 
     @Override
     public void accionPostLoaderConsulta(Cursor cursor) {
-        rvListaProductos.setAdapter(new AdaptadorProductoEnStock(cursor));
+        rvListaProductos.setAdapter(new AdaptadorCompra(cursor));
         if(cursor.getCount() == 0){
             mostrarMensaje();
         }else{

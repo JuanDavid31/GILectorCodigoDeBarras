@@ -1,10 +1,21 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatDialogFragment;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,12 +27,14 @@ import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDe
  * Created by Juan David on 8/05/2018.
  */
 
-public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorProductoEnCompra.ViewHolder> {
+public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorProductoEnCompra.ViewHolder> implements DialogoCantidadAVender.DialogListener {
 
     private ArrayList<Producto> productos;
+    private Context context;
 
-    public AdaptadorProductoEnCompra(ArrayList productos) {
+    public AdaptadorProductoEnCompra(ArrayList productos, Context context) {
         this.productos = productos;
+        this.context = context;
     }
 
     @NonNull
@@ -33,16 +46,67 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorProductoEnCompra.ViewHolder holder, int position) {
-        Producto producto = productos.get(position); //TODO: Añadirle las variables al holder
+    public void onBindViewHolder(@NonNull final AdaptadorProductoEnCompra.ViewHolder holder, int position) {
+        Producto producto = productos.get(position);
         holder.tvCantidadAVender.setText(1 + "");
         holder.tvNombreProducto.setText(producto.getNombre());
-        holder.tvPrecioUnitario.setText(producto.getPrecio() + "");
+        holder.tvPrecioUnitario.setText("$" + producto.getPrecio() + "");
+        cargarMenuOpciones(holder, position);
+    }
+
+    public void cargarMenuOpciones(final ViewHolder holder, final int posicion){
+        TextView opciones = holder.tvOpciones;
+        opciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("MeOprimen","me oprimen");
+                PopupMenu popup = new PopupMenu(context, holder.tvOpciones);
+                popup.inflate(R.menu.menu_opciones_producto_en_compra);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.m_cambiar_cantidad:
+                                abrirDialogo();
+                                return true;
+                            case R.id.m_eliminar:
+                                eliminarProducto(posicion);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.show();
+
+            }
+        });
+    }
+
+    private void eliminarProducto(int posicion){
+        productos.remove(posicion);
+        notifyItemRemoved(posicion);
+        notifyItemRangeChanged(posicion, productos.size());
+    }
+
+    private void abrirDialogo(){
+        DialogoCantidadAVender dialogo = new DialogoCantidadAVender();
+        CompraActivity activity = (CompraActivity)context;
+        dialogo.show(activity.getSupportFragmentManager(), "Dialogo");
     }
 
     @Override
     public int getItemCount() {
         return productos.size();
+    }
+
+    private void cambiarCantidadAVender(){
+
+    }
+
+    @Override
+    public void accion() {
+        //TODO: Cambiar cantidad y actualizar el producto Actual
     }
 
     public class ViewHolder  extends  RecyclerView.ViewHolder{
@@ -60,4 +124,6 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
             tvOpciones = itemView.findViewById(R.id.tv_opciones_producto_en_compra);
         }
     }
+
+
 }

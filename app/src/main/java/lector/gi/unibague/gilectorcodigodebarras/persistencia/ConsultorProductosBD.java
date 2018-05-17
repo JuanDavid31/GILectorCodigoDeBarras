@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.content.AsyncTaskLoader;
 
-import lector.gi.unibague.gilectorcodigodebarras.EscaneoActivity;
 import lector.gi.unibague.gilectorcodigodebarras.provider.AsistenteLectorCodigoDeBarras;
 import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
 
@@ -19,7 +18,7 @@ public class ConsultorProductosBD extends AsyncTaskLoader<Cursor> {
 
     private static AsistenteLectorCodigoDeBarras asistente;
     private Bundle paquete;
-    public final static String X = "datos"; //TODO: Cambiarle el nombre a esto
+    public final static String CODIGO_PRODUCTO_ACTUAL = "Codigo producto actual";
     private Cursor cursor;
 
     public ConsultorProductosBD(Context context, Bundle paquete) {
@@ -37,16 +36,16 @@ public class ConsultorProductosBD extends AsyncTaskLoader<Cursor> {
 
     @Override
     public Cursor loadInBackground() { System.out.println("Estoy en loadInBackground()");
-        int id = darIdProductoDeConsulta();
-        if(id == 0) return darProductos();
+        Long id = darIdProductoDeConsulta();
+        if(id == null) return darProductos();
         return darProducto(id);
     }
 
-    public int darIdProductoDeConsulta(){
+    public Long darIdProductoDeConsulta(){
         if(paquete == null){
-            return 0;
+            return null;
         }else{
-            return paquete.getInt(X);
+            return paquete.getLong(CODIGO_PRODUCTO_ACTUAL);
         }
     }
 
@@ -68,12 +67,12 @@ public class ConsultorProductosBD extends AsyncTaskLoader<Cursor> {
         return cursor;
     }
 
-    private Cursor darProducto(int id){
+    private Cursor darProducto(Long id){
         SQLiteDatabase db = asistente.getReadableDatabase();
         cursor = db.query(ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA,
                 null,
                 ContratoLectorCodigoDeBarras.Producto._ID + " = ?",
-                new String[]{Integer.toString(id)},
+                new String[]{Long.toString(id)},
                 null,
                 null,
                 null);

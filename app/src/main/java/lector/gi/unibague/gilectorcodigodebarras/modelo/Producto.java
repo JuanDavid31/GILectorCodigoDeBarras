@@ -8,24 +8,28 @@ import java.io.Serializable;
 
 public class Producto implements Serializable{
 
-    private int codigo;
+    private Long codigo;
     private String nombre;
-    private int cantidad;
-
+    private int cantidadEnStock;
     private int precio;
 
-    public Producto(int codigo, String nombre, int cantidad, int preci) {
+    private int cantidadVendida;
+
+    public Producto(Long codigo, String nombre, int cantidad, int precio) throws Exception {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.cantidad = cantidad;
+        this.cantidadEnStock = cantidad;
         this.precio = precio;
+        if(cantidadVendida > cantidadEnStock)
+            throw new Exception("No hay cantidad suficiente productos para vender");
+        this.cantidadVendida = 1;
     }
 
-    public int getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
@@ -37,12 +41,12 @@ public class Producto implements Serializable{
         this.nombre = nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getCantidadEnStock() {
+        return cantidadEnStock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setCantidadEnStock(int cantidadEnStock) {
+        this.cantidadEnStock = cantidadEnStock;
     }
 
     public int getPrecio() {
@@ -51,5 +55,15 @@ public class Producto implements Serializable{
 
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    public int getCantidadVendida() {
+        return cantidadVendida;
+    }
+
+    public void setCantidadVendida(int cantidadVendida) throws Exception {
+        if(cantidadVendida > cantidadEnStock)
+            throw new Exception("No hay cantidad suficiente productos para vender");
+        this.cantidadVendida = cantidadVendida;
     }
 }
