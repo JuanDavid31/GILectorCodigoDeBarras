@@ -33,7 +33,6 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
 
     private Long codigoActual;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) { Log.i("EscaneoActivity", "onCreate");
         setTitle("Escaner");
@@ -116,6 +115,7 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
             i = new Intent(this, AdicionProductoActivity.class);
             i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
         }else{
+
             i = new Intent(this, CompraActivity.class);
             i.putExtra(CompraActivity.PRODUCTO_A_VENDER, darProducto(cursor));
         }

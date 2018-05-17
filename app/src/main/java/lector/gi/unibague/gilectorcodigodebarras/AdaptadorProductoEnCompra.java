@@ -27,7 +27,8 @@ import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDe
  * Created by Juan David on 8/05/2018.
  */
 
-public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorProductoEnCompra.ViewHolder> implements DialogoCantidadAVender.DialogListener {
+public class AdaptadorProductoEnCompra extends
+        RecyclerView.Adapter<AdaptadorProductoEnCompra.ViewHolder> {
 
     private ArrayList<Producto> productos;
     private Context context;
@@ -48,7 +49,7 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
     @Override
     public void onBindViewHolder(@NonNull final AdaptadorProductoEnCompra.ViewHolder holder, int position) {
         Producto producto = productos.get(position);
-        holder.tvCantidadAVender.setText(1 + "");
+        holder.tvCantidadAVender.setText(producto.getCantidadVendida() + "");
         holder.tvNombreProducto.setText(producto.getNombre());
         holder.tvPrecioUnitario.setText("$" + producto.getPrecio() + "");
         cargarMenuOpciones(holder, position);
@@ -67,7 +68,7 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.m_cambiar_cantidad:
-                                abrirDialogo();
+                                abrirDialogo(posicion);
                                 return true;
                             case R.id.m_eliminar:
                                 eliminarProducto(posicion);
@@ -84,15 +85,11 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
     }
 
     private void eliminarProducto(int posicion){
-        productos.remove(posicion);
-        notifyItemRemoved(posicion);
-        notifyItemRangeChanged(posicion, productos.size());
+        ((CompraActivity)context).eliminarProducto(posicion);
     }
 
-    private void abrirDialogo(){
-        DialogoCantidadAVender dialogo = new DialogoCantidadAVender();
-        CompraActivity activity = (CompraActivity)context;
-        dialogo.show(activity.getSupportFragmentManager(), "Dialogo");
+    private void abrirDialogo(int posicion){
+        ((CompraActivity)context).abrirDialogo(posicion);
     }
 
     @Override
@@ -103,11 +100,7 @@ public class AdaptadorProductoEnCompra extends RecyclerView.Adapter<AdaptadorPro
     private void cambiarCantidadAVender(){
 
     }
-
-    @Override
-    public void accion() {
-        //TODO: Cambiar cantidad y actualizar el producto Actual
-    }
+    //TODO: Cambiar cantidad y actualizar el producto Actual
 
     public class ViewHolder  extends  RecyclerView.ViewHolder{
 

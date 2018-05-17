@@ -16,6 +16,7 @@ public class AdminSingletons {
     private static CargadorConsultorComprasBD consultorCompras = null;
     private static CargadorEscritorCompraBD escritorCompra = null;
     private static CargadorEscritorCompraProductoBD escritorCompraProducto = null;
+    private static CargadorActualizadorProductoBD actualizadorProducto = null;
 
     public static LoaderManager.LoaderCallbacks<Cursor> darInstanciaConsultorProductos(IPostLoaderConsulta ipl, Context context){
         if(consultorProductos == null){
@@ -60,5 +61,12 @@ public class AdminSingletons {
             escritorCompraProducto = new CargadorEscritorCompraProductoBD(context);
         }
         return escritorCompraProducto;
+    }
+
+    public static LoaderManager.LoaderCallbacks<Void> darInstanciaActualizadorProducto(Context context) {
+        if(actualizadorProducto == null){
+            actualizadorProducto = new CargadorActualizadorProductoBD(context);
+        }
+        return actualizadorProducto;
     }
 }

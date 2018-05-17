@@ -34,7 +34,10 @@ public class AdaptadorProductoEnStock extends RecyclerView.Adapter<AdaptadorProd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         cursor.moveToPosition(position);
         holder.tvNombreProducto.setText(cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE)));
-        holder.tvCantidadProducto.setText(cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD)) + "");
+        holder.tvCantidadProducto.setText("Stock - " +
+                cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD)));
+        holder.tvPrecioUnitario.setText( "Precio unitario - $" +
+                cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO)));
     }
 
     @Override
@@ -46,11 +49,13 @@ public class AdaptadorProductoEnStock extends RecyclerView.Adapter<AdaptadorProd
 
         private TextView tvNombreProducto;
         private TextView tvCantidadProducto;
+        private TextView tvPrecioUnitario;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNombreProducto = itemView.findViewById(R.id.tv_nombre_producto);
             tvCantidadProducto = itemView.findViewById(R.id.tv_cantidad_producto);
+            tvPrecioUnitario = itemView.findViewById(R.id.tv_precio_unitario_producto_en_stock);
         }
     }
 

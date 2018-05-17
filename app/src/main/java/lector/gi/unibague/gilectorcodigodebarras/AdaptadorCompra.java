@@ -34,9 +34,9 @@ class AdaptadorCompra extends RecyclerView.Adapter<AdaptadorCompra.ViewHolder> {
         cursor.moveToPosition(position);
         Log.d("AdaptadorCompra", cursor.getString(1) + " " +
                 cursor.getString(2) + " " + cursor.getInt(3) + " " + cursor.getInt(4));
-        holder.tvFecha.setText(cursor.getString(1));
-        holder.tvNombreCliente.setText(cursor.getString(2));
-        holder.tvTotalPagado.setText(cursor.getInt(4) + "");
+        holder.tvNombreCliente.setText("Cliente - " +cursor.getString(1));
+        holder.tvFecha.setText(cursor.getString(2));
+        holder.tvTotalPagado.setText("Total pagado - $" + cursor.getInt(4));
     }
 
     @Override

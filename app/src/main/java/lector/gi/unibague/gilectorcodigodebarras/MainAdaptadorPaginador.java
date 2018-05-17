@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by Juan David on 9/05/2018.
@@ -18,6 +19,7 @@ public class MainAdaptadorPaginador extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Log.i("AdaptadorPaginador", "Soy la posición +" + position);
         switch (position){
             case 0:
                 return new FragmentCompras();

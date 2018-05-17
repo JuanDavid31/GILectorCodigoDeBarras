@@ -18,6 +18,7 @@ public class DialogoCantidadAVender extends AppCompatDialogFragment {
 
     private NumberPicker npCantidad;
     private DialogListener dl;
+    private int posicion;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,17 +32,28 @@ public class DialogoCantidadAVender extends AppCompatDialogFragment {
                 .setNegativeButton("Deje así", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dl.accion();
+
                     }
                 })
                 .setPositiveButton("De una", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        int cantidad = npCantidad.getValue();
+                        dl.accion(cantidad, posicion);
                     }
                 });
         npCantidad = view.findViewById(R.id.np_cantidad_a_vender);
+        configurarNumberPicker();
         return builder.create();
+    }
+
+    public void setPosicion(int posicion){
+        this.posicion = posicion;
+    }
+
+    public void configurarNumberPicker(){
+        npCantidad.setMinValue(1);
+        npCantidad.setMaxValue(10);
     }
 
     @Override
@@ -51,6 +63,6 @@ public class DialogoCantidadAVender extends AppCompatDialogFragment {
     }
 
     public interface DialogListener{
-        public void accion();
+        public void accion(int cantidad, int posicion);
     }
 }

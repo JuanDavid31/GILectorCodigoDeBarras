@@ -68,11 +68,12 @@ public class AdicionProductoActivity extends AppCompatActivity  implements IPost
     public void accionPostLoaderEscritura(Long l) {
         Log.i("AdicionProductoActivity", "Estoy pasando por aquí");
         Intent i = new Intent(AdicionProductoActivity.this, MainActivity.class);
-//        if(id != -1){
-//            i.putExtra(MainActivity.REFRESCAR_DATOS, true);
-//        }
         startActivity(i);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent startMain = new Intent(this, MainActivity.class);
+        startActivity(startMain);
+    }
 }

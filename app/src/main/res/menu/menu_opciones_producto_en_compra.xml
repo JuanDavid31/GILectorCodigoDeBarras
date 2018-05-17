@@ -3,7 +3,7 @@
 
     <item
     android:id="@+id/m_cambiar_cantidad"
-    android:title="Cambiar cantidadEnStock" />
+    android:title="Cambiar cantidad a comprar" />
 
     <item
         android:id="@+id/m_eliminar"

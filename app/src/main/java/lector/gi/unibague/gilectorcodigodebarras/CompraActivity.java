@@ -25,15 +25,17 @@ import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderEscritura;
 
-public class CompraActivity extends AppCompatActivity implements IPostLoaderEscritura{
+public class CompraActivity extends AppCompatActivity implements IPostLoaderEscritura, DialogoCantidadAVender.DialogListener{
 
     public final static String PRODUCTO_A_VENDER = "Producto a vender";
+    public final static String PRODUCTO_A_ACTUALIZAR = "Producto a actualizar";
     public final static String CEDULA_CLIENTE = "Cedula cliente";
     public final static String CANTIDAD_VENDIDA = "Cantidad vendida";
     public final static String PRODUCTOS = "Productos";
     public final static int LOADER_ESCRITOR_CLIENTE = 14;
     public final static int LOADER_ESCRITOR_COMPRA = 15;
     public final static int LOADER_ESCRITOR_COMPRA_PRODUCTO = 16;
+    public final static int LOADER_ACTUALIZADOR_PRODUCTO = 17;
     public final static String CODIGO_COMPRA= "Codigo compra";
     public final static String CODIGO_PRODUCTO = "Codigo producto";
     private File archivo;
@@ -85,6 +87,12 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         }
     }
 
+    public void eliminarProducto(int posicion){
+        productos.remove(posicion);
+        rvListaProductos.getAdapter().notifyItemRemoved(posicion);
+        rvListaProductos.getAdapter().notifyItemRangeChanged(posicion, productos.size());
+    }
+
     public void limpiarInputStream(InputStream i){
         try {
             i.close();
@@ -128,6 +136,10 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
     }
 
     public void comprar(View v){
+        if(productos == null || productos.size() == 0){
+            Toast.makeText(this, "Añade un producto", Toast.LENGTH_SHORT).show();
+            return;
+        }
         insertarClienteDummy();
         insertarCompra();
         //Sigue en accionPostLoaderEscritura
@@ -152,8 +164,10 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         productos = null;
     }
 
-    public void cambiarCantidadAVender(){
-
+    public void abrirDialogo(int posicion){
+        DialogoCantidadAVender dialogo = new DialogoCantidadAVender();
+        dialogo.setPosicion(posicion);
+        dialogo.show(getSupportFragmentManager(), "Dialogo");
     }
 
     @Override
@@ -196,6 +210,7 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         Intent i = new Intent(this, FacturaActivity.class);
         for(Producto p: productos){
             agregarCompraProducto(codigoCompra, p.getCodigo(), p.getCantidadVendida());
+            actualizarProducto(p);
         }
 
         Bundle bundle = new Bundle();
@@ -207,6 +222,14 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         startActivity(i);
     }
 
+    public void actualizarProducto(Producto producto){
+        Bundle b = new Bundle();
+        b.putSerializable(PRODUCTO_A_ACTUALIZAR, producto);
+        getSupportLoaderManager().initLoader(LOADER_ACTUALIZADOR_PRODUCTO,
+                b,
+                AdminSingletons.darInstanciaActualizadorProducto(this)).forceLoad();
+    }
+
     public void agregarCompraProducto(int codigoCompra, Long codigoProducto, int cantidadVendida){
         Bundle b = new Bundle();
         b.putInt(CODIGO_COMPRA, codigoCompra);
@@ -215,5 +238,23 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA_PRODUCTO,
                 b,
                 AdminSingletons.darInstanciaEscritorCompraProducto(this)).forceLoad();
+    }
+
+    @Override
+    public void accion(int cantidad, int posicion) {
+        Producto producto = productos.get(posicion);
+        try {
+            producto.setCantidadVendida(cantidad);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "No se puede vender esta cantidad", Toast.LENGTH_SHORT).show();
+        }
+        rvListaProductos.getAdapter().notifyItemChanged(posicion);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent startMain = new Intent(this, MainActivity.class);
+        startActivity(startMain);
     }
 }
