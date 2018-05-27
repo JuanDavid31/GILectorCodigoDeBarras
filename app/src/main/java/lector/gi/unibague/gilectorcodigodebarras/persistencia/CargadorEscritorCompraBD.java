@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 import lector.gi.unibague.gilectorcodigodebarras.CompraActivity;
 
@@ -26,11 +27,13 @@ class CargadorEscritorCompraBD implements LoaderManager.LoaderCallbacks<Long>{
     @NonNull
     @Override
     public Loader<Long> onCreateLoader(int id, @Nullable Bundle args) {
+        Log.i("DorEscritorCompraDB", "OnCreaLoader EscritorCompraDB");
         return new EscritorCompraBD(context, args.getInt(CompraActivity.CEDULA_CLIENTE));
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<Long> loader, Long data) {
+        Log.i("DorEscritorCompraDB", "OnLoadFinish EscritorCompraDB");
         ipe.accionPostLoaderEscritura(data);
     }
 

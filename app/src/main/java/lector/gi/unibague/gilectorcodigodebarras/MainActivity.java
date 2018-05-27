@@ -1,9 +1,11 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,10 +24,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
         vpPaginador = findViewById(R.id.vp_paginador_main);
         vpPaginador.setAdapter(new MainAdaptadorPaginador(getSupportFragmentManager()));
         //TODO: Hasta aquí no hay pestañas, sería bueno seguir el ejemplo de android studio
         //TODO: Probar en un proyecto vacio con solo pestañas.
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        vpPaginador.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(vpPaginador));
 
     }
 

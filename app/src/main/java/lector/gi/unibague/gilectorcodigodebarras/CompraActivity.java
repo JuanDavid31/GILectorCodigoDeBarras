@@ -140,9 +140,16 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
             Toast.makeText(this, "Añade un producto", Toast.LENGTH_SHORT).show();
             return;
         }
-        insertarClienteDummy();
-        insertarCompra();
+        agregarCompraProductoYActualizarProducto();
+
         //Sigue en accionPostLoaderEscritura
+
+        Intent i = new Intent(this, FacturaActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(PRODUCTOS, productos);
+        i.putExtras(bundle);
+        limpiarCache();
+        startActivity(i);
     }
 
     public void insertarClienteDummy(){
@@ -205,21 +212,15 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
 
     @Override
     public void accionPostLoaderEscritura(Long l) {
-        codigoCompra = Integer.parseInt(l.toString());
 
-        Intent i = new Intent(this, FacturaActivity.class);
-        for(Producto p: productos){
-            agregarCompraProducto(codigoCompra, p.getCodigo(), p.getCantidadVendida());
-            actualizarProducto(p);
-        }
+    }
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(PRODUCTOS, productos);
-        i.putExtras(bundle);
-
-        limpiarCache();
-
-        startActivity(i);
+    public void agregarCompraProductoYActualizarProducto(){
+        Bundle b = new Bundle();
+        b.putSerializable(PRODUCTOS, productos);
+        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA_PRODUCTO,
+                b,
+                AdminSingletons.darInstanciaEscritorCompraProducto(this)).forceLoad();
     }
 
     public void actualizarProducto(Producto producto){
@@ -228,16 +229,6 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         getSupportLoaderManager().initLoader(LOADER_ACTUALIZADOR_PRODUCTO,
                 b,
                 AdminSingletons.darInstanciaActualizadorProducto(this)).forceLoad();
-    }
-
-    public void agregarCompraProducto(int codigoCompra, Long codigoProducto, int cantidadVendida){
-        Bundle b = new Bundle();
-        b.putInt(CODIGO_COMPRA, codigoCompra);
-        b.putLong(CODIGO_PRODUCTO, codigoProducto);
-        b.putInt(CANTIDAD_VENDIDA, cantidadVendida);
-        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA_PRODUCTO,
-                b,
-                AdminSingletons.darInstanciaEscritorCompraProducto(this)).forceLoad();
     }
 
     @Override

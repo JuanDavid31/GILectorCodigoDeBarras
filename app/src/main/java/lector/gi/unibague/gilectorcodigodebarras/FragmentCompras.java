@@ -82,6 +82,7 @@ public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
     @Override
     public void accionPostLoaderConsulta(Cursor cursor) {
         rvListaProductos.setAdapter(new AdaptadorCompra(cursor));
+        rvListaProductos.getAdapter().notifyDataSetChanged();
         if(cursor.getCount() == 0){
             mostrarMensaje();
         }else{

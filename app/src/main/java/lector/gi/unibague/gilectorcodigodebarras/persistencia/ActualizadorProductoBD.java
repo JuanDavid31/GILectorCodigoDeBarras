@@ -39,16 +39,16 @@ class ActualizadorProductoBD extends AsyncTaskLoader<Void> {
     }
 
     public void actualizarProducto(){
-        Producto producto = (Producto) paquete.getSerializable(CompraActivity.PRODUCTO_A_ACTUALIZAR);
+        Producto p = (Producto) paquete.getSerializable(CompraActivity.PRODUCTO_A_ACTUALIZAR);
         SQLiteDatabase db = asistente.getWritableDatabase();
         // UPDATE COMPANY SET ADDRESS = 'Texas', SALARY = 20000.00;
         String sql = "UPDATE " + ContratoLectorCodigoDeBarras.Producto.NOMBRE_TABLA +
                 " set " + ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD +
-                " = " + (producto.getCantidadEnStock() - producto.getCantidadVendida()) +
+                " = " + (p.getCantidadEnStock() - p.getCantidadVendida()) +
                 " where " + ContratoLectorCodigoDeBarras.Producto._ID +
-                " = " + producto.getCodigo();
+                " = " + p.getCodigo();
 
-        Log.i("ActualizadorProducto",sql);
         db.execSQL(sql);
+        Log.i("ActualizadorProducto",sql);
     }
 }

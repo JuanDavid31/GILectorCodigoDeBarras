@@ -64,7 +64,7 @@ public class FacturaActivity extends AppCompatActivity {
     public int darPagoTotal(){
         int total = 0;
         for(Producto p: productos){
-            total += p.getPrecio();
+            total += (p.getPrecio() * p.getCantidadVendida());
         }
         return total;
     }
