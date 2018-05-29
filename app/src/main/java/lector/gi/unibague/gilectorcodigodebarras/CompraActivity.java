@@ -2,10 +2,12 @@ package lector.gi.unibague.gilectorcodigodebarras;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,29 +22,31 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderEscritura;
+import room.entidades.Producto;
+import room.entidades.Cliente;
+import room.entidades.Compra;
+import room.entidades.CompraProducto;
+import room.repositorio.Repositorio;
+import room.repositorio.RepositorioCliente;
+import room.repositorio.RepositorioCompra;
+import room.repositorio.RepositorioCompraProducto;
+import room.repositorio.RepositorioProducto;
 
-public class CompraActivity extends AppCompatActivity implements IPostLoaderEscritura, DialogoCantidadAVender.DialogListener{
+public class CompraActivity extends AppCompatActivity implements DialogoCantidadAVender.DialogListener{
 
     public final static String PRODUCTO_A_VENDER = "Producto a vender";
     public final static String PRODUCTO_A_ACTUALIZAR = "Producto a actualizar";
     public final static String CEDULA_CLIENTE = "Cedula cliente";
-    public final static String CANTIDAD_VENDIDA = "Cantidad vendida";
     public final static String PRODUCTOS = "Productos";
-    public final static int LOADER_ESCRITOR_CLIENTE = 14;
-    public final static int LOADER_ESCRITOR_COMPRA = 15;
-    public final static int LOADER_ESCRITOR_COMPRA_PRODUCTO = 16;
-    public final static int LOADER_ACTUALIZADOR_PRODUCTO = 17;
-    public final static String CODIGO_COMPRA= "Codigo compra";
-    public final static String CODIGO_PRODUCTO = "Codigo producto";
     private File archivo;
     private ArrayList<Producto> productos;
-    private Producto productoActual;
-    private int codigoCompra;
-
     private RecyclerView rvListaProductos;
 
     @Override
@@ -109,7 +113,6 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         if(seCargaronLosProductos()){
             if(!estaAgregado(producto))productos.add(producto);
         }else{
-            productoActual = producto;
             productos = new ArrayList<Producto>();
             productos.add(producto);
         }
@@ -140,30 +143,7 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
             Toast.makeText(this, "Añade un producto", Toast.LENGTH_SHORT).show();
             return;
         }
-        agregarCompraProductoYActualizarProducto();
-
-        //Sigue en accionPostLoaderEscritura
-
-        Intent i = new Intent(this, FacturaActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(PRODUCTOS, productos);
-        i.putExtras(bundle);
-        limpiarCache();
-        startActivity(i);
-    }
-
-    public void insertarClienteDummy(){
-        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_CLIENTE,
-                null,
-                AdminSingletons.darInstanciaEscritorCliente(this)).forceLoad();
-    }
-
-    public void insertarCompra(){
-        Bundle b = new Bundle();
-        b.putInt(CEDULA_CLIENTE,1110582700);
-        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA,
-                b,
-                AdminSingletons.darInstanciaEscritorCompra(this, this)).forceLoad();
+        agregarCompraProductoYActualizarProductos();
     }
 
     public void limpiarCache(){
@@ -210,32 +190,98 @@ public class CompraActivity extends AppCompatActivity implements IPostLoaderEscr
         }
     }
 
-    @Override
-    public void accionPostLoaderEscritura(Long l) {
+    public void agregarCompraProductoYActualizarProductos(){
+        //Insercion, consulta, insercion, actualización
+        //Completable, Flowable, Completable, Completable
+        Completable c = insertarClienteDummy();
+        Flowable<Integer> fCodigoCompra = insertarCompra();
+
+//        V1
+//        c.andThen(fCodigoCompra).map(codigoCompra ->{
+//
+//            List<CompraProducto> compraProductos = null;
+//            compraProductos = new ArrayList<CompraProducto>();
+//            for (Producto p: productos) {
+//                compraProductos.add(new CompraProducto(0, codigoCompra, p.getCodigo(), p.getCantidad()));
+//            }
+//            return compraProductos;
+//        }).subscribe(compraProductos -> {
+//
+//            RepositorioCompraProducto repo = new RepositorioCompraProducto(getApplicationContext());
+//            RepositorioProducto repo2 = new RepositorioProducto(getApplicationContext());
+//            repo.agregarCompraProductos((CompraProducto[]) compraProductos.toArray())
+//                    .mergeWith(repo2.actualizarProductos((Producto[]) productos.toArray()))
+//                    .subscribe(() -> irAFacturaACtivity());
+//        }).dispose();
+
+//        V2
+        c.andThen(fCodigoCompra)
+            .map(codigoCompra -> crearCompraProductosPorCodigoCompra(codigoCompra))
+            .flatMapCompletable(compraProductos -> agregarCompraProductos(compraProductos))
+            .andThen(actualizarCompraProductos())
+            .subscribe();
+
+//        V3
+//        c.andThen(fCodigoCompra)
+//            .map(this::crearCompraProductosPorCodigoCompra)
+//            .flatMapCompletable(this::agregarCompraProductos)
+//            .andThen(actualizarCompraProductos())
+//            .subscribe();
 
     }
 
-    public void agregarCompraProductoYActualizarProducto(){
-        Bundle b = new Bundle();
-        b.putSerializable(PRODUCTOS, productos);
-        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_COMPRA_PRODUCTO,
-                b,
-                AdminSingletons.darInstanciaEscritorCompraProducto(this)).forceLoad();
+    private Completable insertarClienteDummy(){
+        Cliente cliente = new Cliente(1110582700, "Juan");
+        Repositorio repo = new RepositorioCliente(getApplicationContext());
+        return Completable.fromAction(() -> repo.agregarElemento(cliente));
     }
 
-    public void actualizarProducto(Producto producto){
-        Bundle b = new Bundle();
-        b.putSerializable(PRODUCTO_A_ACTUALIZAR, producto);
-        getSupportLoaderManager().initLoader(LOADER_ACTUALIZADOR_PRODUCTO,
-                b,
-                AdminSingletons.darInstanciaActualizadorProducto(this)).forceLoad();
+    private Flowable<Integer> insertarCompra(){
+
+        String fecha = (String) DateFormat.format("yyyy-MM-dd hh:mm:ss a", Calendar.getInstance().getTime());
+
+        Repositorio repo = new RepositorioCompra(getApplicationContext());
+        Completable p = repo.agregarElemento(new Compra(0, 1110582700, fecha));
+        RepositorioCompra repo2 = new RepositorioCompra(getApplicationContext());
+        Flowable<Compra> f = repo2.darCompraPorFecha(fecha);
+        Flowable f1 = f.flatMap(compra -> Flowable.fromArray(compra.getCodigo()));
+        return p.andThen(f1);
+
+    }
+
+    private ArrayList crearCompraProductosPorCodigoCompra(int codigoCompra){
+        ArrayList<CompraProducto> compraProductos = null;
+        compraProductos = new ArrayList<CompraProducto>();
+        for (Producto p: productos) {
+            compraProductos.add(new CompraProducto(0, codigoCompra, p.getCodigo(), p.getCantidad()));
+        }
+        return compraProductos;
+    }
+
+    private Completable agregarCompraProductos(ArrayList compraProductos){
+        RepositorioCompraProducto repo = new RepositorioCompraProducto(getApplicationContext());
+        return repo.agregarCompraProductos((CompraProducto[]) compraProductos.toArray());
+    }
+
+    private Completable actualizarCompraProductos(){
+        RepositorioProducto repo2 = new RepositorioProducto(getApplicationContext());
+        return repo2.actualizarProductos((Producto[]) productos.toArray());
+    }
+
+    public void irAFacturaACtivity(){
+        Intent i = new Intent(this, FacturaActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(PRODUCTOS, productos);
+        i.putExtras(bundle);
+        limpiarCache();
+        startActivity(i);
     }
 
     @Override
     public void accion(int cantidad, int posicion) {
         Producto producto = productos.get(posicion);
         try {
-            producto.setCantidadVendida(cantidad);
+            producto.setCantidad(cantidad);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "No se puede vender esta cantidad", Toast.LENGTH_SHORT).show();

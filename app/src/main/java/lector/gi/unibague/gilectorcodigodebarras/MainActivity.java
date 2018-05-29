@@ -15,9 +15,6 @@ import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsult
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static int LOADER_CONSULTOR_PRODUCTOS_DB = 11;
-    public final static int LOADER_CONSULTOR_COMPRAS_DB = 12;
-    public final static String REFRESCAR_DATOS = "Refrescas datos";
     private ViewPager vpPaginador;
 
     @Override
@@ -25,13 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         vpPaginador = findViewById(R.id.vp_paginador_main);
         vpPaginador.setAdapter(new MainAdaptadorPaginador(getSupportFragmentManager()));
-        //TODO: Hasta aquí no hay pestañas, sería bueno seguir el ejemplo de android studio
-        //TODO: Probar en un proyecto vacio con solo pestañas.
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 

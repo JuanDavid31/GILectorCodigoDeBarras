@@ -30,7 +30,7 @@ public class CargadorConsultorComprasBD implements LoaderManager.LoaderCallbacks
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        ipl.accionPostLoaderConsulta(data);
+        ipl.accionPostLoaderConsulta(null);
     }
 
     @Override

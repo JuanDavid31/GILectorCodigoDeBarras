@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
+import io.reactivex.Completable;
+import room.entidades.Producto;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderEscritura;
+import room.repositorio.Repositorio;
+import room.repositorio.RepositorioProducto;
 
 public class AdicionProductoActivity extends AppCompatActivity  implements IPostLoaderEscritura {
 
@@ -44,11 +47,10 @@ public class AdicionProductoActivity extends AppCompatActivity  implements IPost
     }
 
     public void agregarProducto(View v){
-        Bundle b = new Bundle();
-        b.putSerializable(PRODUCTO, darProducto());
-        getSupportLoaderManager().initLoader(LOADER_ESCRITOR_PRODUCTO_DB,
-                b,
-                AdminSingletons.darInstanciaEscritorProducto(this, AdicionProductoActivity.this)).forceLoad();
+        Repositorio repo = new RepositorioProducto(getApplicationContext());
+        Completable
+                .fromAction(() -> repo.agregarElemento(darProducto()))
+                .subscribe(() -> irAMainActivity());
     }
 
     private Producto darProducto(){
@@ -56,19 +58,18 @@ public class AdicionProductoActivity extends AppCompatActivity  implements IPost
         String nombre = etNombreProducto.getText().toString();
         int cantidad = Integer.parseInt(etCantidadProducto.getText().toString());
         int precio = Integer.parseInt(etPrecioProducto.getText().toString());
-        try {
-            return new Producto(codigo, nombre, cantidad, precio);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new Producto(codigo, nombre, cantidad, precio);
+
+    }
+
+    public void irAMainActivity(){
+        Intent i = new Intent(AdicionProductoActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     @Override
     public void accionPostLoaderEscritura(Long l) {
-        Log.i("AdicionProductoActivity", "Estoy pasando por aquí");
-        Intent i = new Intent(AdicionProductoActivity.this, MainActivity.class);
-        startActivity(i);
+
     }
 
     @Override

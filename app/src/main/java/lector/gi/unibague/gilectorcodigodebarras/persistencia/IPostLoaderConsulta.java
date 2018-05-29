@@ -1,6 +1,8 @@
 package lector.gi.unibague.gilectorcodigodebarras.persistencia;
 
-import android.database.Cursor;
+import java.util.List;
+
+import room.entidades.Producto;
 
 /**
  * Created by Juan David on 14/05/2018.
@@ -8,5 +10,5 @@ import android.database.Cursor;
 
 public interface IPostLoaderConsulta {
 
-    public void accionPostLoaderConsulta(Cursor cursor);
+    public void accionPostLoaderConsulta(List<Producto> cursor);
 }

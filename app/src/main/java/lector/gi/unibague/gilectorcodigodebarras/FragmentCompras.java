@@ -1,6 +1,5 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,14 +12,23 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.List;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
+import room.entidades.DatosCompra;
+import room.entidades.Producto;
+import room.repositorio.Repositorio;
+import room.repositorio.RepositorioCompra;
 
 /**
  * Created by Juan David on 9/05/2018.
  */
 
-public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
+public class FragmentCompras extends Fragment{
 
     private static TextView tvInformacion;
     private static ProgressBar pbBarraProgreso;
@@ -56,9 +64,11 @@ public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
 
     public void realizarConsulta(){
         ocultarLista();
-        getLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_COMPRAS_DB,
-                null,
-                AdminSingletons.darInstanciaConsultorCompras(this, getActivity()));
+        RepositorioCompra repo = new RepositorioCompra(getActivity().getApplication());
+        repo.darDatosCompras()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(datosCompras -> actualizarAdaptador(datosCompras));
     }
 
     public static void ocultarLista(){
@@ -79,11 +89,10 @@ public class FragmentCompras extends Fragment implements IPostLoaderConsulta{
         rvListaProductos.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void accionPostLoaderConsulta(Cursor cursor) {
-        rvListaProductos.setAdapter(new AdaptadorCompra(cursor));
+    public void actualizarAdaptador(List datosCompras){
+        rvListaProductos.setAdapter(new AdaptadorCompra(datosCompras));
         rvListaProductos.getAdapter().notifyDataSetChanged();
-        if(cursor.getCount() == 0){
+        if(datosCompras.size() == 0){
             mostrarMensaje();
         }else{
             mostrarLista();

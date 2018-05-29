@@ -9,16 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
+import room.entidades.DatosCompra;
+
 /**
  * Created by Juan David on 15/05/2018.
  */
 
 class AdaptadorCompra extends RecyclerView.Adapter<AdaptadorCompra.ViewHolder> {
 
-    private Cursor cursor;
+    private List<DatosCompra> datosCompras;
 
-    public AdaptadorCompra(Cursor cursor) {
-        this.cursor = cursor;
+    public AdaptadorCompra(List datosCompras) {
+        this.datosCompras = datosCompras;
     }
 
     @NonNull
@@ -31,17 +35,17 @@ class AdaptadorCompra extends RecyclerView.Adapter<AdaptadorCompra.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        cursor.moveToPosition(position);
-        Log.d("AdaptadorCompra", cursor.getString(1) + " " +
-                cursor.getString(2) + " " + cursor.getInt(3) + " " + cursor.getInt(4));
-        holder.tvNombreCliente.setText("Cliente - " +cursor.getString(1));
-        holder.tvFecha.setText(cursor.getString(2));
-        holder.tvTotalPagado.setText("Total pagado - $" + cursor.getInt(4));
+        DatosCompra dt = datosCompras.get(position);
+        Log.d("AdaptadorCompra", dt.nombreCliente + " " +
+                dt.fecha + " " + dt.totalCompra);
+        holder.tvNombreCliente.setText("Cliente - " + dt.nombreCliente);
+        holder.tvFecha.setText(dt.fecha);
+        holder.tvTotalPagado.setText("Total pagado - $" + dt.totalCompra);
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return datosCompras.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

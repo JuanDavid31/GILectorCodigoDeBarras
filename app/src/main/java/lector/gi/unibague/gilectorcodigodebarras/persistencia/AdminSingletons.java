@@ -1,8 +1,11 @@
 package lector.gi.unibague.gilectorcodigodebarras.persistencia;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.LoaderManager;
+
+import room.DatabaseApp;
 
 /**
  * Created by Juan David on 4/05/2018.
@@ -17,6 +20,8 @@ public class AdminSingletons {
     private static CargadorEscritorCompraBD escritorCompra = null;
     private static CargadorEscritorCompraProductoBD escritorCompraProducto = null;
     private static CargadorActualizadorProductoBD actualizadorProducto = null;
+
+    private static DatabaseApp baseDeDatos = null;
 
     public static LoaderManager.LoaderCallbacks<Cursor> darInstanciaConsultorProductos(IPostLoaderConsulta ipl, Context context){
         if(consultorProductos == null){
@@ -68,5 +73,16 @@ public class AdminSingletons {
             actualizadorProducto = new CargadorActualizadorProductoBD(context);
         }
         return actualizadorProducto;
+    }
+
+    public static DatabaseApp darInstanciaBD(Context context){
+        if(baseDeDatos == null){
+            baseDeDatos = Room.
+                    databaseBuilder(context,
+                                    DatabaseApp.class,
+                                    "LectorCodigoDeBarras.db")
+                                    .build();
+        }
+        return baseDeDatos;
     }
 }

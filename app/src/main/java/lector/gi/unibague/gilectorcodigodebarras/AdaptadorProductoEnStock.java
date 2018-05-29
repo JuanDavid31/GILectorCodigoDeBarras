@@ -1,6 +1,5 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
+import room.entidades.Producto;
 
 /**
  * Created by Personal on 25/03/2018.
@@ -16,10 +18,10 @@ import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDe
 
 public class AdaptadorProductoEnStock extends RecyclerView.Adapter<AdaptadorProductoEnStock.ViewHolder> {
 
-    private Cursor cursor;
+    private List<Producto> productos;
 
-    public AdaptadorProductoEnStock(Cursor cursor){
-        this.cursor = cursor;
+    public AdaptadorProductoEnStock(List<Producto> productos){
+        this.productos = productos;
     }
 
     @NonNull
@@ -32,17 +34,15 @@ public class AdaptadorProductoEnStock extends RecyclerView.Adapter<AdaptadorProd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        cursor.moveToPosition(position);
-        holder.tvNombreProducto.setText(cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE)));
-        holder.tvCantidadProducto.setText("Stock - " +
-                cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD)));
-        holder.tvPrecioUnitario.setText( "Precio unitario - $" +
-                cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO)));
+        Producto p = productos.get(position);
+        holder.tvNombreProducto.setText(p.nombre);
+        holder.tvCantidadProducto.setText("Stock - " + p.cantidad);
+        holder.tvPrecioUnitario.setText( "Precio unitario - $" + p.precio);
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return productos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

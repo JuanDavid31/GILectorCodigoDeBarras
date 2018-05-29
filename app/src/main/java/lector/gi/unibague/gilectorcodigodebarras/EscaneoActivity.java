@@ -20,12 +20,14 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.List;
 
-import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
+import room.entidades.Producto;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.ConsultorProductosBD;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
-import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
+import room.repositorio.Repositorio;
+import room.repositorio.RepositorioCompra;
+import room.repositorio.RepositorioProducto;
 
 public class EscaneoActivity extends AppCompatActivity implements IPostLoaderConsulta, Runnable {
 
@@ -108,42 +110,34 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
     }
 
     @Override
-    public void accionPostLoaderConsulta(Cursor cursor) {
-        Log.i("EscaneoActivity","Acción post loader consulta");
+    public void accionPostLoaderConsulta(List<Producto> cursor) {
+
+    }
+
+    @Override
+    public void run() {
+        Repositorio repo = new RepositorioProducto(getApplicationContext());
+        Log.i("Run EscaneoAc", (Looper.myLooper() == Looper.getMainLooper())+ "");
+        repo.darElemento(codigoActual).subscribe( producto -> {
+            Log.i("Flowable EscaneoAc", (Looper.myLooper() == Looper.getMainLooper())+ "");
+            validarProducto((Producto) producto);
+        });
+    }
+
+    public void validarProducto(Producto p){
         Intent i;
-        if(cursor.getCount() == 0){
+        if(p == null){
             i = new Intent(this, AdicionProductoActivity.class);
             i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
         }else{
 
             i = new Intent(this, CompraActivity.class);
-            i.putExtra(CompraActivity.PRODUCTO_A_VENDER, darProducto(cursor));
+            i.putExtra(CompraActivity.PRODUCTO_A_VENDER, p);
         }
         startActivity(i);
     }
 
-    @Override
-    public void run() { Log.i("EscaneoActivity", "RUN: Estoy en run");
-        Bundle b = new Bundle();
-        b.putLong(ConsultorProductosBD.CODIGO_PRODUCTO_ACTUAL, codigoActual);
-        getSupportLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB,
-                b,
-                AdminSingletons.darInstanciaConsultorProductos(this, EscaneoActivity.this));
-    }
-
     private Producto darProducto(Cursor cursor){
-        cursor.moveToFirst();
-
-        Long id = cursor.getLong(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto._ID));
-        String nombre = cursor.getString(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_NOMBRE));
-        int cantidad = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_CANTIDAD));
-        int precio = cursor.getInt(cursor.getColumnIndex(ContratoLectorCodigoDeBarras.Producto.COLUMNA_PRECIO_UNITARIO));
-
-        try {
-            return new Producto(id, nombre, cantidad, precio);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return  null;
     }
 }

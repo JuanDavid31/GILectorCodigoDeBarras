@@ -1,22 +1,30 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
-import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
 import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
+import room.entidades.Producto;
+import room.repositorio.Repositorio;
+import room.repositorio.RepositorioProducto;
 
-public class FragmentProducos extends Fragment implements IPostLoaderConsulta{
+public class FragmentProducos extends Fragment{
 
     private static TextView tvInformacion;
     private static ProgressBar pbBarraProgreso;
@@ -52,7 +60,14 @@ public class FragmentProducos extends Fragment implements IPostLoaderConsulta{
 
     public void realizarConsulta(){
         ocultarLista();
-        getLoaderManager().initLoader(MainActivity.LOADER_CONSULTOR_PRODUCTOS_DB, null, AdminSingletons.darInstanciaConsultorProductos(this, getActivity()));
+        Repositorio repo = new RepositorioProducto(getActivity().getApplication());
+        repo.darElementos()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( datos -> {
+                Log.i("Flowable FProductos", (Looper.myLooper() == Looper.getMainLooper())+ "");
+                actualizarProductos((List) datos);
+            });
     }
 
     public static void ocultarLista(){
@@ -73,14 +88,15 @@ public class FragmentProducos extends Fragment implements IPostLoaderConsulta{
         rvListaProductos.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void accionPostLoaderConsulta(Cursor cursor) {
-        rvListaProductos.setAdapter(new AdaptadorProductoEnStock(cursor));
-        if(cursor.getCount() == 0){
+    public void actualizarProductos(List productos){
+        rvListaProductos.setAdapter(new AdaptadorProductoEnStock(productos));
+        if(productos.size() == 0){
             mostrarMensaje();
         }else{
             mostrarLista();
         }
     }
+
+
 
 }
