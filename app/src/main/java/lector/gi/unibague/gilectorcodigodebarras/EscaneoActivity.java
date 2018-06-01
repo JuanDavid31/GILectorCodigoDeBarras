@@ -19,24 +19,30 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.reactivestreams.Subscriber;
+
 import java.io.IOException;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.MaybeObserver;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import room.entidades.Producto;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
 import room.repositorio.Repositorio;
 import room.repositorio.RepositorioCompra;
 import room.repositorio.RepositorioProducto;
 
-public class EscaneoActivity extends AppCompatActivity implements IPostLoaderConsulta, Runnable {
+public class EscaneoActivity extends AppCompatActivity {
 
     SurfaceView camara;
 
     private Long codigoActual;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { Log.i("EscaneoActivity", "onCreate");
+    protected void onCreate(Bundle savedInstanceState) {
         setTitle("Escaner");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scaneo);
@@ -45,7 +51,12 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
     }
 
     public void realizarConsulta(){
-        new Handler(Looper.getMainLooper()).post(this);
+        Repositorio repo = new RepositorioProducto(getApplicationContext());
+        repo.darElemento(codigoActual)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe((producto) -> irACompraActivity((Producto) producto),
+                    (err) -> Log.i("Error", err.toString()),
+                    () -> irAAdicionProductoACtivity());
     }
 
     public void configurarCamara() {
@@ -99,7 +110,7 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
         @Override
         public void receiveDetections(Detector.Detections<Barcode> detections) {
             SparseArray<Barcode> objetosDetectados = detections.getDetectedItems();
-            if(objetosDetectados.size() > 0) { Log.i("EscaneoActivity","receiveDetections");
+            if(objetosDetectados.size() > 0) {
                 if (escaneoActivity.codigoActual != null)return;
                 Barcode barcode = objetosDetectados.valueAt(0);
                 escaneoActivity.codigoActual =  Long.parseLong(barcode.displayValue);
@@ -109,35 +120,17 @@ public class EscaneoActivity extends AppCompatActivity implements IPostLoaderCon
 
     }
 
-    @Override
-    public void accionPostLoaderConsulta(List<Producto> cursor) {
-
-    }
-
-    @Override
-    public void run() {
-        Repositorio repo = new RepositorioProducto(getApplicationContext());
-        Log.i("Run EscaneoAc", (Looper.myLooper() == Looper.getMainLooper())+ "");
-        repo.darElemento(codigoActual).subscribe( producto -> {
-            Log.i("Flowable EscaneoAc", (Looper.myLooper() == Looper.getMainLooper())+ "");
-            validarProducto((Producto) producto);
-        });
-    }
-
-    public void validarProducto(Producto p){
-        Intent i;
-        if(p == null){
-            i = new Intent(this, AdicionProductoActivity.class);
-            i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
-        }else{
-
-            i = new Intent(this, CompraActivity.class);
-            i.putExtra(CompraActivity.PRODUCTO_A_VENDER, p);
-        }
+    public void irACompraActivity(Producto p){
+        Intent i = new Intent(this, CompraActivity.class);
+        i.putExtra(CompraActivity.PRODUCTO_A_VENDER, p);
         startActivity(i);
     }
 
-    private Producto darProducto(Cursor cursor){
-        return  null;
+    public void irAAdicionProductoACtivity(){
+        Intent i = new Intent(this, AdicionProductoActivity.class);
+        i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
+        startActivity(i);
     }
+
+
 }

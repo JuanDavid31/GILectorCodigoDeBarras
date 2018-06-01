@@ -16,10 +16,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
 import room.entidades.Producto;
 import room.repositorio.Repositorio;
 import room.repositorio.RepositorioProducto;
@@ -62,12 +61,17 @@ public class FragmentProducos extends Fragment{
         ocultarLista();
         Repositorio repo = new RepositorioProducto(getActivity().getApplication());
         repo.darElementos()
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( datos -> {
-                Log.i("Flowable FProductos", (Looper.myLooper() == Looper.getMainLooper())+ "");
-                actualizarProductos((List) datos);
-            });
+            .subscribe( datos -> actualizarProductos((List) datos));
+
+//        Completable c1 =Completable.fromAction(() -> System.out.println("1 " + Thread.currentThread().getName())).subscribeOn(Schedulers.io());
+//        Completable c2 = Completable.fromAction(() -> System.out.println("2 "+ Thread.currentThread().getName())).subscribeOn(Schedulers.io());
+//        Completable c3 = Completable.fromAction(() -> System.out.println("3 "+ Thread.currentThread().getName())).subscribeOn(Schedulers.io());
+//
+//        c1.observeOn(AndroidSchedulers.mainThread())
+//                .andThen(c2)
+//                .andThen(c3)
+//                .subscribe(() -> System.out.println("Termine " +Thread.currentThread().getName()));
     }
 
     public static void ocultarLista(){

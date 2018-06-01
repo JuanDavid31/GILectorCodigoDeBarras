@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
 import room.entidades.Producto;
 
 /**

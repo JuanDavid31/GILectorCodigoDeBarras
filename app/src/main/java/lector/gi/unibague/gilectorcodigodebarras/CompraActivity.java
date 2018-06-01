@@ -2,7 +2,6 @@ package lector.gi.unibague.gilectorcodigodebarras;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,12 +22,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
+
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import room.entidades.Producto;
 import room.entidades.Cliente;
 import room.entidades.Compra;
@@ -42,10 +42,9 @@ import room.repositorio.RepositorioProducto;
 public class CompraActivity extends AppCompatActivity implements DialogoCantidadAVender.DialogListener{
 
     public final static String PRODUCTO_A_VENDER = "Producto a vender";
-    public final static String PRODUCTO_A_ACTUALIZAR = "Producto a actualizar";
-    public final static String CEDULA_CLIENTE = "Cedula cliente";
     public final static String PRODUCTOS = "Productos";
     private File archivo;
+    private String fecha;
     private ArrayList<Producto> productos;
     private RecyclerView rvListaProductos;
 
@@ -108,7 +107,7 @@ public class CompraActivity extends AppCompatActivity implements DialogoCantidad
     public void adicionarNuevoProducto(){
         Intent i = getIntent();
         Producto producto = (Producto) i.getSerializableExtra(PRODUCTO_A_VENDER);
-
+        producto.setCantidad(1);
         if(producto == null)return;
         if(seCargaronLosProductos()){
             if(!estaAgregado(producto))productos.add(producto);
@@ -191,62 +190,63 @@ public class CompraActivity extends AppCompatActivity implements DialogoCantidad
     }
 
     public void agregarCompraProductoYActualizarProductos(){
-        //Insercion, consulta, insercion, actualización
-        //Completable, Flowable, Completable, Completable
-        Completable c = insertarClienteDummy();
-        Flowable<Integer> fCodigoCompra = insertarCompra();
+//        Completable c = insertarClienteDummy()
+//                .doOnError(err -> System.out.println("Error - insertarCliente "+ Thread.currentThread().getName() + err.getMessage()));
+//        Completable c2 = insertarCompra()
+//                .doOnError(err -> System.out.println("Error - agrego compra y la busco"+ Thread.currentThread().getName() + err.getMessage()));
+//        Completable c3 = agregarCompraProductosPorFecha()
+//                .doOnError(err -> System.out.println("Error - Agrego compraProductosPorFecha"+ Thread.currentThread().getName() + err.getMessage()));
+//        Completable c4 = actualizarProductos()
+//                .doOnError(err -> System.out.println("Error - Actualizo productos"+ Thread.currentThread().getName() + err.getMessage()));
 
-//        V1
-//        c.andThen(fCodigoCompra).map(codigoCompra ->{
-//
-//            List<CompraProducto> compraProductos = null;
-//            compraProductos = new ArrayList<CompraProducto>();
-//            for (Producto p: productos) {
-//                compraProductos.add(new CompraProducto(0, codigoCompra, p.getCodigo(), p.getCantidad()));
-//            }
-//            return compraProductos;
-//        }).subscribe(compraProductos -> {
-//
-//            RepositorioCompraProducto repo = new RepositorioCompraProducto(getApplicationContext());
-//            RepositorioProducto repo2 = new RepositorioProducto(getApplicationContext());
-//            repo.agregarCompraProductos((CompraProducto[]) compraProductos.toArray())
-//                    .mergeWith(repo2.actualizarProductos((Producto[]) productos.toArray()))
-//                    .subscribe(() -> irAFacturaACtivity());
-//        }).dispose();
+//        c.subscribeOn(Schedulers.io())
+//                .andThen(c2)
+//                .andThen(c3)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(() -> irAFacturaActivity());
 
-//        V2
-        c.andThen(fCodigoCompra)
-            .map(codigoCompra -> crearCompraProductosPorCodigoCompra(codigoCompra))
-            .flatMapCompletable(compraProductos -> agregarCompraProductos(compraProductos))
-            .andThen(actualizarCompraProductos())
-            .subscribe();
+        Cliente cliente = new Cliente(111, "Juan");
+        fecha = (String) DateFormat.format("yyyy-MM-dd hh:mm:ss a", Calendar.getInstance().getTime());
+        Compra compra = new Compra(0, 111, fecha);
+        Repositorio repo = new RepositorioCliente(getApplicationContext());
 
-//        V3
-//        c.andThen(fCodigoCompra)
-//            .map(this::crearCompraProductosPorCodigoCompra)
-//            .flatMapCompletable(this::agregarCompraProductos)
-//            .andThen(actualizarCompraProductos())
-//            .subscribe();
+        Completable.fromAction(() ->{
+
+            repo.darInstanciaDB()
+                    .darDaoCliente()
+                    .hacerDeTodo(repo.darInstanciaDB(), cliente, compra, productos);
+
+        }).subscribeOn(Schedulers.io())
+        .subscribe(() -> irAFacturaActivity());
+
 
     }
 
     private Completable insertarClienteDummy(){
-        Cliente cliente = new Cliente(1110582700, "Juan");
+        Cliente cliente = new Cliente(111, "Juan");
         Repositorio repo = new RepositorioCliente(getApplicationContext());
-        return Completable.fromAction(() -> repo.agregarElemento(cliente));
+        return repo.agregarElemento(cliente);
     }
 
-    private Flowable<Integer> insertarCompra(){
+    private Completable insertarCompra(){
 
-        String fecha = (String) DateFormat.format("yyyy-MM-dd hh:mm:ss a", Calendar.getInstance().getTime());
+        fecha = (String) DateFormat.format("yyyy-MM-dd hh:mm:ss a", Calendar.getInstance().getTime());
 
         Repositorio repo = new RepositorioCompra(getApplicationContext());
-        Completable p = repo.agregarElemento(new Compra(0, 1110582700, fecha));
-        RepositorioCompra repo2 = new RepositorioCompra(getApplicationContext());
-        Flowable<Compra> f = repo2.darCompraPorFecha(fecha);
-        Flowable f1 = f.flatMap(compra -> Flowable.fromArray(compra.getCodigo()));
-        return p.andThen(f1);
+        return repo.agregarElemento(new Compra(0, 111, fecha))
+                .doOnError(err -> System.out.println("Error :"+ Thread.currentThread().getName() + err.getMessage()));
 
+    }
+
+    public Completable agregarCompraProductosPorFecha(){ //Flowable: O le pongo trampoline() o le pongo io()
+        RepositorioCompra repo2 = new RepositorioCompra(getApplicationContext());
+        Completable c = repo2
+                .darCompraPorFecha(fecha)
+                .subscribeOn(Schedulers.io())
+                .map(compra -> crearCompraProductosPorCodigoCompra(compra.getCodigo()))
+                .flatMapCompletable(compraProductos -> agregarCompraProductos(compraProductos))
+                .doOnError(err -> System.out.println("Error :"+ Thread.currentThread().getName() + err.getMessage()));;
+        return c;
     }
 
     private ArrayList crearCompraProductosPorCodigoCompra(int codigoCompra){
@@ -258,17 +258,19 @@ public class CompraActivity extends AppCompatActivity implements DialogoCantidad
         return compraProductos;
     }
 
-    private Completable agregarCompraProductos(ArrayList compraProductos){
+    private Completable agregarCompraProductos(ArrayList<CompraProducto> compraProductos){
         RepositorioCompraProducto repo = new RepositorioCompraProducto(getApplicationContext());
-        return repo.agregarCompraProductos((CompraProducto[]) compraProductos.toArray());
+        return repo
+                .agregarCompraProductos(compraProductos.toArray(new CompraProducto[compraProductos.size()]))
+                .doOnError(err -> System.out.println("Error :"+ Thread.currentThread().getName() + err.getMessage()));
     }
 
-    private Completable actualizarCompraProductos(){
+    private Completable actualizarProductos(){
         RepositorioProducto repo2 = new RepositorioProducto(getApplicationContext());
-        return repo2.actualizarProductos((Producto[]) productos.toArray());
+        return repo2.actualizarProductos(productos.toArray(new Producto[productos.size()]));
     }
 
-    public void irAFacturaACtivity(){
+    public void irAFacturaActivity(){
         Intent i = new Intent(this, FacturaActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(PRODUCTOS, productos);

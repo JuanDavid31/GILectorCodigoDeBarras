@@ -6,8 +6,8 @@ import android.arch.persistence.room.Insert;
 import room.entidades.CompraProducto;
 
 @Dao
-public interface DaoCompraProducto {
+public abstract class DaoCompraProducto {
 
     @Insert
-    void agregarCompraProductos(CompraProducto... compraProductos);
+    public abstract void agregarCompraProductos(CompraProducto... compraProductos);
 }

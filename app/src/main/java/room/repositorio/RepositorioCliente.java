@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import room.entidades.Cliente;
 
 public class RepositorioCliente extends Repositorio<Cliente> {
@@ -21,15 +22,17 @@ public class RepositorioCliente extends Repositorio<Cliente> {
     }
 
     @Override
-    public Flowable<Cliente> darElemento(Object id) {
+    public Maybe<Cliente> darElemento(Object id) {
         return null;
     }
 
     @Override
     public Completable agregarElemento(Cliente elemento) {
-        Log.i("RespositorioCliente", "Agregar elemento " + elemento.toString());
         return Completable
-                .fromAction(() -> darInstanciaDB().darDaoCliente().agregarCliente(elemento));
+                .fromAction(() -> {
+                    Log.i("RepositorioCliente", "Agregar elemento" + Thread.currentThread().getName());
+                    darInstanciaDB().darDaoCliente().agregarCliente(elemento);
+                });
     }
 
     @Override

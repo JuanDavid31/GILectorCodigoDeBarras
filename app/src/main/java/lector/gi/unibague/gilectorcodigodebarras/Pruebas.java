@@ -9,16 +9,24 @@ import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class Pruebas {
 
-//    public static void main(String[] args){
-//
-//
-////        Completable c1 =Completable.fromAction(() -> System.out.println("1"));
-////        Completable c2 = Completable.fromAction(() -> System.out.println("2"));
-////        Completable c3 = Completable.fromAction(() -> System.out.println("3"));
-////        c1.andThen(c2).andThen(c3).subscribe();
+    public static void main(String[] args) throws InterruptedException {
+
+
+        Completable c1 =Completable.fromAction(() -> {
+            System.out.println("1 " + Thread.currentThread().getName());
+        }).observeOn(Schedulers.io());
+        Completable c2 = Completable.fromAction(() -> System.out.println("2 "+ Thread.currentThread().getName()));
+        Completable c3 = Completable.fromAction(() -> System.out.println("3 "+ Thread.currentThread().getName()));
+        c1.observeOn(Schedulers.io())
+            .subscribe(() -> System.out.println("Termine " + Thread.currentThread().getName()));
+
+        Thread.sleep(1000);
 //
 //        //Insercion, consulta, insercion, actualización
 //        //Completable, Flowable, Completable, Completable
@@ -68,5 +76,5 @@ public class Pruebas {
 ////        completable
 ////                .andThen(observable)
 ////                .subscribe(integer -> System.out.println("emitted:"+integer));
-//    }
+    }
 }

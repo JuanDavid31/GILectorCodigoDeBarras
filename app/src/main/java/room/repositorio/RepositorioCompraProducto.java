@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import room.entidades.CompraProducto;
 
 public class RepositorioCompraProducto extends Repositorio<CompraProducto> {
@@ -21,7 +22,7 @@ public class RepositorioCompraProducto extends Repositorio<CompraProducto> {
     }
 
     @Override
-    public Flowable<CompraProducto> darElemento(Object id) {
+    public Maybe<CompraProducto> darElemento(Object id) {
         return null;
     }
 
@@ -44,10 +45,10 @@ public class RepositorioCompraProducto extends Repositorio<CompraProducto> {
     }
 
     public Completable agregarCompraProductos(CompraProducto... compraProductos){
-        Log.i("RespoCompraProducto", "AgregarCompraProductos " + compraProductos.toString());
         return Completable
-                .fromAction(() -> darInstanciaDB()
-                                    .darDaoCompraProducto()
-                                    .agregarCompraProductos(compraProductos));
+                .fromAction(() -> {
+                    Log.i("RepoCompraProducto", "AgregarCompraProductos " + Thread.currentThread().getName());
+                    darInstanciaDB().darDaoCompraProducto().agregarCompraProductos(compraProductos);
+                });
     }
 }

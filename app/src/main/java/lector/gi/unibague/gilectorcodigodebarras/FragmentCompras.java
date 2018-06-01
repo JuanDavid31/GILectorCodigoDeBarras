@@ -17,8 +17,6 @@ import java.util.List;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.AdminSingletons;
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
 import room.entidades.DatosCompra;
 import room.entidades.Producto;
 import room.repositorio.Repositorio;
@@ -66,7 +64,7 @@ public class FragmentCompras extends Fragment{
         ocultarLista();
         RepositorioCompra repo = new RepositorioCompra(getActivity().getApplication());
         repo.darDatosCompras()
-            .subscribeOn(Schedulers.io())
+//            .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(datosCompras -> actualizarAdaptador(datosCompras));
     }

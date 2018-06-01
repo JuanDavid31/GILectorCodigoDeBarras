@@ -20,8 +20,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
-import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
+import room.entidades.Producto;
+
 
 /**
  * Created by Juan David on 8/05/2018.
@@ -49,7 +49,7 @@ public class AdaptadorProductoEnCompra extends
     @Override
     public void onBindViewHolder(@NonNull final AdaptadorProductoEnCompra.ViewHolder holder, int position) {
         Producto producto = productos.get(position);
-        holder.tvCantidadAVender.setText(producto.getCantidadVendida() + "");
+        holder.tvCantidadAVender.setText(producto.getCantidad() + "");
         holder.tvNombreProducto.setText(producto.getNombre());
         holder.tvPrecioUnitario.setText("$" + producto.getPrecio() + "");
         cargarMenuOpciones(holder, position);

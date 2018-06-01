@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import room.entidades.Producto;
 
 public class RepositorioProducto extends Repositorio<Producto> {
@@ -23,7 +24,8 @@ public class RepositorioProducto extends Repositorio<Producto> {
     }
 
     @Override
-    public Flowable<Producto> darElemento(Object id) {
+    public Maybe<Producto> darElemento(Object id) {
+        Log.i("RepositorioProducto", Thread.currentThread().getName());
         return darInstanciaDB()
                 .darDaoProducto()
                 .darProducto((Long)id);
@@ -31,8 +33,7 @@ public class RepositorioProducto extends Repositorio<Producto> {
 
     @Override
     public Completable agregarElemento(Producto elemento) {
-
-        return null;
+        return Completable.fromAction(()-> darInstanciaDB().darDaoProducto().agregarProducto(elemento));
     }
 
     @Override
@@ -48,10 +49,9 @@ public class RepositorioProducto extends Repositorio<Producto> {
     }
 
     public Completable actualizarProductos(Producto... productos){
-        Log.i("RespositorioProducto", "sctualizarProductos " + productos.toString());
-        return Completable
-                .fromAction(() -> darInstanciaDB()
-                                    .darDaoProducto()
-                                    .actualizarProductos(productos));
+        return Completable.fromAction(() -> {
+            Log.i("RepositorioProducto", "actualizarProductos " + Thread.currentThread().getName());
+            darInstanciaDB().darDaoProducto().actualizarProductos(productos);
+        });
     }
 }

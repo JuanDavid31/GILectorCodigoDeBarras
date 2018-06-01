@@ -3,12 +3,15 @@ package room.repositorio;
 import android.content.Context;
 import android.util.Log;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
+import io.reactivex.schedulers.Schedulers;
 import room.entidades.Compra;
 import room.entidades.DatosCompra;
 
@@ -25,15 +28,17 @@ public class RepositorioCompra extends Repositorio<Compra>{
     }
 
     @Override
-    public Flowable<Compra> darElemento(Object id) {
+    public Maybe<Compra> darElemento(Object id) {
         return null;
     }
 
     @Override
     public Completable agregarElemento(Compra elemento) {
-        Log.i("RespositorioCompra", "Agregar elemento " + elemento.toString());
         return Completable
-                .fromAction(() -> darInstanciaDB().darDaoCompra().agregarCompra(elemento));
+                .fromAction(() -> {
+                    Log.i("RepositorioCompra", "Agregar elemento " + Thread.currentThread().getName());
+                    darInstanciaDB().darDaoCompra().agregarCompra(elemento);
+                });
     }
 
     @Override
@@ -54,10 +59,32 @@ public class RepositorioCompra extends Repositorio<Compra>{
                 .darDatosCompra();
     }
 
-    public Flowable<Compra> darCompraPorFecha(String fecha){
-        Log.i("RespositorioCompra", "darCompraPorFecha " + fecha);
+    public Maybe<Compra> darCompraPorFecha(String fecha){
         return darInstanciaDB()
                 .darDaoCompra()
                 .darCompraPorFecha(fecha);
+        //TODO: doOnCOmplete  | doOnSubsribe?
     }
+
+//    Flowable.range(1, 10).subscribe(new Subscriber<Integer>() {
+//        @Override
+//        public void onSubscribe(Subscription s) {
+//            s.request(Long.MAX_VALUE);
+//        }
+//
+//        @Override
+//        public void onNext(Integer t) {
+//            System.out.println(t);
+//        }
+//
+//        @Override
+//        public void onError(Throwable t) {
+//            t.printStackTrace();
+//        }
+//
+//        @Override
+//        public void onComplete() {
+//            System.out.println("Done");
+//        }
+//    });
 }

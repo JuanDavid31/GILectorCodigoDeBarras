@@ -16,8 +16,8 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import lector.gi.unibague.gilectorcodigodebarras.modelo.Producto;
-import lector.gi.unibague.gilectorcodigodebarras.provider.ContratoLectorCodigoDeBarras;
+import room.entidades.Producto;
+
 
 public class FacturaActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class FacturaActivity extends AppCompatActivity {
         factura += "PRODUCTO        VALOR\n\n";
         factura += "=======================\n\n";
         for(Producto p: productos){
-        factura += p.getNombre() + " x" +p.getCantidadVendida() +"                    $" +  (p.getPrecio()*p.getCantidadVendida()) + "\n";
+        factura += p.getNombre() + " x" +p.getCantidad() +"                    $" +  (p.getPrecio()*p.getCantidad()) + "\n";
         }
         factura += "\n";
         factura += "=======================\n\n";
@@ -64,7 +64,7 @@ public class FacturaActivity extends AppCompatActivity {
     public int darPagoTotal(){
         int total = 0;
         for(Producto p: productos){
-            total += (p.getPrecio() * p.getCantidadVendida());
+            total += (p.getPrecio() * p.getCantidad());
         }
         return total;
     }

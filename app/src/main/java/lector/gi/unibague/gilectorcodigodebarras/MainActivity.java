@@ -11,8 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import lector.gi.unibague.gilectorcodigodebarras.persistencia.IPostLoaderConsulta;
-
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager vpPaginador;
