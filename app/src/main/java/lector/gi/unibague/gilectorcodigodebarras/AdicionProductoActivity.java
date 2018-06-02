@@ -1,5 +1,6 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import io.reactivex.schedulers.Schedulers;
 import room.entidades.Producto;
 import room.repositorio.Repositorio;
 import room.repositorio.RepositorioProducto;
+import viewModel.AdicionProductoViewModel;
+import viewModel.FabricaViewModel;
 
 public class AdicionProductoActivity extends AppCompatActivity{
 
@@ -21,14 +24,16 @@ public class AdicionProductoActivity extends AppCompatActivity{
     private EditText etNombreProducto;
     private EditText etCantidadProducto;
     private EditText etPrecioProducto;
+    private AdicionProductoViewModel vmAdicionProducto;
 
     public final static String CODIGO_PRODUCTO = "Codigo producto";
-    public final static String PRODUCTO = "Producto";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicion_producto);
+        FabricaViewModel.FabricaAdicionProductoViewModel fab = new FabricaViewModel.FabricaAdicionProductoViewModel(getApplicationContext());
+        vmAdicionProducto = ViewModelProviders.of(this, fab).get(AdicionProductoViewModel.class);
         cargarVariablesIniciales();
         cargarCodigo();
     }
@@ -47,10 +52,7 @@ public class AdicionProductoActivity extends AppCompatActivity{
     }
 
     public void agregarProducto(View v){
-        Repositorio repo = new RepositorioProducto(getApplicationContext());
-        repo.agregarElemento(darProducto())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        vmAdicionProducto.agregarProductos(darProducto())
             .subscribe(() -> irAMainActivity());
     }
 

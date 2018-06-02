@@ -11,100 +11,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e7fdb3b-16e5-4350-ae18-5e757e3a5368" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__backport_util_concurrent_backport_util_concurrent_3_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__classworlds_classworlds_1_1_alpha_2_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_almworks_sqlite4java_sqlite4java_0_282_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_amitshekhar_android_debug_db_1_0_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2_alpha1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_1_0_2_alpha1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2_alpha1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_apps_common_testing_accessibility_framework_accessibility_test_framework_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_0_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_guava_20_0_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_protobuf_protobuf_java_2_6_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_ibm_icu_icu4j_53_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_thoughtworks_xstream_xstream_1_4_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__nekohtml_nekohtml_1_9_6_2_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__nekohtml_xercesMinimal_1_9_6_2_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_zetetic_android_database_sqlcipher_3_5_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_ant_ant_1_8_0_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_ant_ant_launcher_1_8_0_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_ant_tasks_2_1_3_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_artifact_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_artifact_manager_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_error_diagnostics_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_model_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_plugin_registry_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_profile_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_project_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_repository_metadata_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_settings_2_2_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_wagon_wagon_file_1_0_beta_6_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_wagon_wagon_http_lightweight_1_0_beta_6_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_wagon_wagon_http_shared_1_0_beta_6_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_wagon_wagon_provider_api_1_0_beta_6_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bouncycastle_bcprov_jdk15on_1_52_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_codehaus_plexus_plexus_container_default_1_0_alpha_9_stable_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_codehaus_plexus_plexus_interpolation_1_11_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_codehaus_plexus_plexus_utils_1_5_15_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_5_0_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_commons_5_0_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_tree_5_0_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_annotations_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_junit_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_resources_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_robolectric_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_sandbox_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_shadowapi_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_shadows_framework_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_robolectric_utils_3_8_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__xmlpull_xmlpull_1_1_3_1_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__xpp3_xpp3_min_1_1_4c_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/test/java/lector/gi/unibague/gilectorcodigodebarras/TestTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_0_jar.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_1.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_1_jar.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_extensions_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_extensions_1_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_0.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdaptadorProductoEnCompra.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdaptadorProductoEnCompra.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdaptadorProductoEnStock.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdaptadorProductoEnStock.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FacturaActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FacturaActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/Pruebas.java" afterPath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/Pruebas.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/modelo/Producto.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/ActualizadorProductoBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/AdminSingletons.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorActualizadorProductoBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorConsultorComprasBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorConsultorProductosBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorEscritorClienteBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorEscritorCompraBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorEscritorCompraProductoBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorEscritorProductosBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/ConsultorComprasBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/ConsultorProductosBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/EscritorClienteBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/EscritorCompraBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/EscritorCompraProducto.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/EscritorProductoBD.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/IPostLoaderConsulta.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/IPostLoaderEscritura.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/provider/AsistenteLectorCodigoDeBarras.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/provider/ContratoLectorCodigoDeBarras.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompra.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompra.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoProducto.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/dao/DaoProducto.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCliente.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCliente.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompra.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompra.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompraProducto.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompraProducto.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioProducto.java" afterPath="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioProducto.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewModel/FabricaViewModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/viewModel/FabricaViewModel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -131,22 +50,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CompraActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java">
+      <file leaf-file-name="DaoCliente.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="292" column="0" lean-forward="true" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-              <folding>
-                <element signature="method#onCreate#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#eliminarProducto#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#limpiarInputStream#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#seCargaronLosProductos#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#estaAgregado#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#agregarProducto#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#limpiarCache#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#abrirDialogo#0;class#CompraActivity#0" expanded="false" />
-                <element signature="method#agregarCompraProductosPorFecha#0;class#CompraActivity#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="197">
+              <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DaoCompraProducto.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -165,8 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>EscaneoAc:</find>
-      <find>Flowable</find>
       <find>EscaneoAc</find>
       <find>EscaneoACtivity</find>
       <find>EscaneoActivity:</find>
@@ -194,7 +111,9 @@
       <find>public DaoCompra</find>
       <find>End tr</find>
       <find>transaccion</find>
+      <find>hacerDeTodo</find>
       <find>repo</find>
+      <find>@Transaction</find>
     </findStrings>
     <replaceStrings>
       <replace>tvNombreProducto</replace>
@@ -203,6 +122,9 @@
       <replace />
       <replace>Repositorio</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\Proyectos\Android\GILectorCodigoDeBarras\app\src\main\java\room\repositorio</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2303,14 +2225,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/ConsultorProductosBD.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_cantidad_a_vender.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/DialogoCantidadAVender.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_holder_producto_en_stock.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_holder_compra.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_opciones_producto_en_compra.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorActualizadorProductoDB.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/Main2Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainAdaptadorPaginador.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
@@ -2337,28 +2251,36 @@
         <option value="$PROJECT_DIR$/app/src/main/java/room/DatabaseApp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCliente.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FacturaActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdaptadorProductoEnStock.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/test/java/lector/gi/unibague/gilectorcodigodebarras/TestTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioProducto.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompraProducto.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/dao/DaoProducto.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompra.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompra.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/MainViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/ProductosViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/ComprasViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/EscaneoViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/AdicionProductoViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/CompraViewModel.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/viewModel/FabricaViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
@@ -2381,6 +2303,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2393,29 +2317,23 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
-            <path>
-              <item name="GILectorCodigoDeBarras" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="192.168.0.7:5555" />
+    <property name="device.picker.selection" value="0123456789ABCDEF" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="android.project.structure.last.selected" value="Project" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/LectorCodigoDeBarras.db" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1527877043547" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1528216263787" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
   </component>
   <component name="RecentsManager">
@@ -2829,24 +2747,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32730561" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295107" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.960217" sideWeight="0.36926606" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.960217" sideWeight="0.63073397" order="2" side_tool="false" content_ui="tabs" x="1366" y="0" width="1366" height="728" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49367088" sideWeight="0.63073397" order="2" side_tool="false" content_ui="tabs" x="1366" y="0" width="1366" height="728" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30018082" sideWeight="0.44801223" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6528029" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3417431" sideWeight="0.49367088" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3417431" sideWeight="0.49367088" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5081374" sideWeight="0.5874233" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3003,12 +2920,6 @@
           <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java</url>
-          <line>273</line>
-          <properties />
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioProducto.java</url>
           <line>52</line>
           <properties />
@@ -3021,16 +2932,8 @@
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java</url>
-          <line>245</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java</url>
-          <line>95</line>
+          <line>87</line>
           <properties />
           <option name="timeStamp" value="139" />
         </line-breakpoint>
@@ -3046,11 +2949,17 @@
           <properties />
           <option name="timeStamp" value="141" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/viewModel/CompraViewModel.java</url>
+          <line>38</line>
+          <properties />
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="142" />
+      <option name="time" value="143" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3061,51 +2970,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorConsultorProductosBD.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/CargadorConsultorComprasBD.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/persistencia/AdminSingletons.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainAdaptadorPaginador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/entidades/CompraProducto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.14/1d852092fc0e7711e2f47dd3b6a061e6479310f5/rxjava-2.1.14-sources.jar!/io/reactivex/Flowable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="6966" column="18" lean-forward="false" selection-start-line="6966" selection-start-column="17" selection-end-line="6966" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.0.aar/58d8307dc7a3500dbf643a8fb1b8d0a6/jars/classes.jar!/com/google/android/gms/vision/Detector.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="35" column="42" lean-forward="false" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.14/1d852092fc0e7711e2f47dd3b6a061e6479310f5/rxjava-2.1.14-sources.jar!/io/reactivex/internal/observers/CallbackCompletableObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.14/1d852092fc0e7711e2f47dd3b6a061e6479310f5/rxjava-2.1.14-sources.jar!/io/reactivex/functions/Consumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.14/1d852092fc0e7711e2f47dd3b6a061e6479310f5/rxjava-2.1.14-sources.jar!/io/reactivex/functions/Action.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -3151,24 +3015,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="42" lean-forward="false" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -3190,16 +3040,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="e#3400#3401#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3213,19 +3053,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/apt/debug/room/DatabaseApp_Impl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="222" column="0" lean-forward="false" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3233,7 +3064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3241,7 +3071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3257,15 +3086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3281,7 +3101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3289,23 +3108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="58" column="21" lean-forward="false" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="64" column="41" lean-forward="false" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3313,15 +3115,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="67">
           <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCliente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3329,15 +3122,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3345,7 +3129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-440">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3353,11 +3136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3365,7 +3143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3373,7 +3150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3381,15 +3157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="3999" column="0" lean-forward="false" selection-start-line="3999" selection-start-column="0" selection-end-line="3999" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3397,7 +3164,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3405,33 +3171,175 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/Repositorio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCliente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/repositorio/RepositorioCompra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1150">
+          <caret line="65" column="45" lean-forward="true" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/lector/gi/unibague/gilectorcodigodebarras/ExampleInstrumentedTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/viewmodel/1.1.1/d1cc8e805317f171be63c68341f499acda7e42d6/viewmodel-1.1.1-sources.jar!/android/arch/lifecycle/ViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-700">
+          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentProducos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="96" column="32" lean-forward="true" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
+        <state relative-caret-position="50">
+          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/ProductosViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/ComprasViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/EscaneoViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/EscaneoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/AdicionProductoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/AdicionProductoViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/CompraViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="66" column="19" lean-forward="false" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#limpiarInputStream#0;class#CompraViewModel#0" expanded="false" />
+            <element signature="method#darFechaActual#0;class#CompraViewModel#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/CompraActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="292" column="0" lean-forward="true" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="127" column="5" lean-forward="true" selection-start-line="127" selection-start-column="5" selection-end-line="127" selection-end-column="5" />
           <folding>
-            <element signature="method#onCreate#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#eliminarProducto#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#limpiarInputStream#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#seCargaronLosProductos#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#estaAgregado#0;class#CompraActivity#0" expanded="false" />
             <element signature="method#agregarProducto#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#limpiarCache#0;class#CompraActivity#0" expanded="false" />
             <element signature="method#abrirDialogo#0;class#CompraActivity#0" expanded="false" />
-            <element signature="method#agregarCompraProductosPorFecha#0;class#CompraActivity#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/lector/gi/unibague/gilectorcodigodebarras/FragmentCompras.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="42" column="27" lean-forward="false" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/viewModel/FabricaViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="39" column="63" lean-forward="false" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCompraProducto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/room/dao/DaoCliente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,5 +1,6 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,13 +15,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import room.entidades.DatosCompra;
-import room.entidades.Producto;
-import room.repositorio.Repositorio;
 import room.repositorio.RepositorioCompra;
+import viewModel.ComprasViewModel;
+import viewModel.FabricaViewModel;
 
 /**
  * Created by Juan David on 9/05/2018.
@@ -31,6 +29,7 @@ public class FragmentCompras extends Fragment{
     private static TextView tvInformacion;
     private static ProgressBar pbBarraProgreso;
     private static RecyclerView rvListaProductos;
+    private ComprasViewModel vmCompras;
 
     public FragmentCompras() {
 
@@ -39,13 +38,14 @@ public class FragmentCompras extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        FabricaViewModel.FabricaComprasViewModel fabrica = new FabricaViewModel.FabricaComprasViewModel(getActivity().getApplication());
+        vmCompras = ViewModelProviders.of(this, fabrica).get(ComprasViewModel.class);
         realizarConsulta();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_compras, container, false);
         cargarVariablesIniciales(rootView);
         return rootView;
@@ -63,8 +63,7 @@ public class FragmentCompras extends Fragment{
     public void realizarConsulta(){
         ocultarLista();
         RepositorioCompra repo = new RepositorioCompra(getActivity().getApplication());
-        repo.darDatosCompras()
-//            .subscribeOn(AndroidSchedulers.mainThread())
+        vmCompras.darDatosCompras()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(datosCompras -> actualizarAdaptador(datosCompras));
     }

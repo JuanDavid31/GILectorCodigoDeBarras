@@ -1,13 +1,14 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +17,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import room.entidades.Producto;
 import room.repositorio.Repositorio;
 import room.repositorio.RepositorioProducto;
+import viewModel.FabricaViewModel;
+import viewModel.ProductosViewModel;
 
 public class FragmentProducos extends Fragment{
 
     private static TextView tvInformacion;
     private static ProgressBar pbBarraProgreso;
     private static RecyclerView rvListaProductos;
+    private ProductosViewModel vmProductos;
 
     public FragmentProducos() {
 
@@ -36,13 +36,14 @@ public class FragmentProducos extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ViewModelProvider.Factory fab = new FabricaViewModel.FabricaProductosViewModel(getActivity().getApplicationContext());
+        vmProductos = ViewModelProviders.of(this, fab).get(ProductosViewModel.class);
         realizarConsulta();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_productos, container, false);
         cargarVariablesIniciales(rootView);
         return rootView;
@@ -60,18 +61,9 @@ public class FragmentProducos extends Fragment{
     public void realizarConsulta(){
         ocultarLista();
         Repositorio repo = new RepositorioProducto(getActivity().getApplication());
-        repo.darElementos()
-            .observeOn(AndroidSchedulers.mainThread())
+        vmProductos
+            .darProductos()
             .subscribe( datos -> actualizarProductos((List) datos));
-
-//        Completable c1 =Completable.fromAction(() -> System.out.println("1 " + Thread.currentThread().getName())).subscribeOn(Schedulers.io());
-//        Completable c2 = Completable.fromAction(() -> System.out.println("2 "+ Thread.currentThread().getName())).subscribeOn(Schedulers.io());
-//        Completable c3 = Completable.fromAction(() -> System.out.println("3 "+ Thread.currentThread().getName())).subscribeOn(Schedulers.io());
-//
-//        c1.observeOn(AndroidSchedulers.mainThread())
-//                .andThen(c2)
-//                .andThen(c3)
-//                .subscribe(() -> System.out.println("Termine " +Thread.currentThread().getName()));
     }
 
     public static void ocultarLista(){

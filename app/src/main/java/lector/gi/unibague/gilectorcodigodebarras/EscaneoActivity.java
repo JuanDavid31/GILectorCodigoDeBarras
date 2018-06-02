@@ -1,6 +1,7 @@
 package lector.gi.unibague.gilectorcodigodebarras;
 
 import android.Manifest;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
@@ -34,12 +35,14 @@ import room.entidades.Producto;
 import room.repositorio.Repositorio;
 import room.repositorio.RepositorioCompra;
 import room.repositorio.RepositorioProducto;
+import viewModel.EscaneoViewModel;
+import viewModel.FabricaViewModel;
 
 public class EscaneoActivity extends AppCompatActivity {
 
     SurfaceView camara;
 
-    private Long codigoActual;
+    private EscaneoViewModel vmEscaneo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,13 @@ public class EscaneoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scaneo);
         camara = (SurfaceView) findViewById(R.id.sv_escaneo_camara);
+        FabricaViewModel.FabricaEscaneoViewModel fab = new FabricaViewModel.FabricaEscaneoViewModel(getApplicationContext());
+        vmEscaneo = ViewModelProviders.of(this, fab).get(EscaneoViewModel.class);
         configurarCamara();
     }
 
     public void realizarConsulta(){
-        Repositorio repo = new RepositorioProducto(getApplicationContext());
-        repo.darElemento(codigoActual)
-            .observeOn(AndroidSchedulers.mainThread())
+        vmEscaneo.darProducto()
             .subscribe((producto) -> irACompraActivity((Producto) producto),
                     (err) -> Log.i("Error", err.toString()),
                     () -> irAAdicionProductoACtivity());
@@ -111,24 +114,24 @@ public class EscaneoActivity extends AppCompatActivity {
         public void receiveDetections(Detector.Detections<Barcode> detections) {
             SparseArray<Barcode> objetosDetectados = detections.getDetectedItems();
             if(objetosDetectados.size() > 0) {
-                if (escaneoActivity.codigoActual != null)return;
+                if (vmEscaneo.codigoActual != null)return;
                 Barcode barcode = objetosDetectados.valueAt(0);
-                escaneoActivity.codigoActual =  Long.parseLong(barcode.displayValue);
+                vmEscaneo.codigoActual =  Long.parseLong(barcode.displayValue);
                 escaneoActivity.realizarConsulta();
             }
         }
 
     }
 
-    public void irACompraActivity(Producto p){
+    public void irACompraActivity(Producto producto){
         Intent i = new Intent(this, CompraActivity.class);
-        i.putExtra(CompraActivity.PRODUCTO_A_VENDER, p);
+        i.putExtra(CompraActivity.PRODUCTO_A_VENDER, producto);
         startActivity(i);
     }
 
     public void irAAdicionProductoACtivity(){
         Intent i = new Intent(this, AdicionProductoActivity.class);
-        i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  codigoActual);
+        i.putExtra(AdicionProductoActivity.CODIGO_PRODUCTO,  vmEscaneo.codigoActual);
         startActivity(i);
     }
 

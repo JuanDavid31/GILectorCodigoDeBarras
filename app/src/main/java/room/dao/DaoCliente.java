@@ -27,7 +27,7 @@ public abstract class DaoCliente {
         agregarCliente(cliente);
         //agrego la compra
         db.darDaoCompra().agregarCompra(compra);
-        //Consulto la compra
+        //Consulto la compra V1
         db.darDaoCompra().darCompraPorFecha(compra.getFecha())
             .subscribe(compraBuscada ->{
                 db.darDaoCompraProducto()
@@ -36,6 +36,18 @@ public abstract class DaoCliente {
                     );
                 db.darDaoProducto().actualizarProductos(productos.toArray(new Producto[productos.size()]));
             });
+
+        //V2
+        db.darDaoCompra()
+            .darCompraPorFecha(compra.getFecha())
+            .flatMapCompletable(compraBuscada ->{
+                return Completable.fromAction(() -> {
+                    db.darDaoCompraProducto()
+                        .agregarCompraProductos(crearCompraProductosPorCodigoCompra(compraBuscada.getCodigo(), productos));
+                });
+            }).subscribe();
+        db.darDaoProducto().actualizarProductos(productos.toArray(new Producto[productos.size()]));
+
         //Con la compra consultado agrego los CompraProductos
         //actualizo los productos
 
