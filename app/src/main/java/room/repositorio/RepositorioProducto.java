@@ -25,7 +25,6 @@ public class RepositorioProducto extends Repositorio<Producto> {
 
     @Override
     public Maybe<Producto> darElemento(Object id) {
-        Log.i("RepositorioProducto", Thread.currentThread().getName());
         return darInstanciaDB()
                 .darDaoProducto()
                 .darProducto((Long)id);
@@ -38,7 +37,6 @@ public class RepositorioProducto extends Repositorio<Producto> {
 
     @Override
     public Completable editarElemento(Producto elemento) {
-
         return null;
     }
 
@@ -50,7 +48,6 @@ public class RepositorioProducto extends Repositorio<Producto> {
 
     public Completable actualizarProductos(Producto... productos){
         return Completable.fromAction(() -> {
-            Log.i("RepositorioProducto", "actualizarProductos " + Thread.currentThread().getName());
             darInstanciaDB().darDaoProducto().actualizarProductos(productos);
         });
     }

@@ -30,7 +30,6 @@ public class RepositorioCliente extends Repositorio<Cliente> {
     public Completable agregarElemento(Cliente elemento) {
         return Completable
                 .fromAction(() -> {
-                    Log.i("RepositorioCliente", "Agregar elemento" + Thread.currentThread().getName());
                     darInstanciaDB().darDaoCliente().agregarCliente(elemento);
                 });
     }

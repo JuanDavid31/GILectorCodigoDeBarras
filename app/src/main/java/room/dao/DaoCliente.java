@@ -2,11 +2,13 @@ package room.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Transaction;
 
 import java.util.ArrayList;
 
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import room.DatabaseApp;
 import room.entidades.Cliente;
 import room.entidades.Compra;
@@ -21,6 +23,9 @@ public abstract class DaoCliente {
 
     @Insert
     public abstract void agregarCliente(Cliente cliente);
+
+    @Query("Select * from GI_CLIENTE where c_cedula = :cedula")
+    public abstract Single<Cliente> darCliente(int cedula);
 
     @Transaction
     public void hacerDeTodo(DatabaseApp db, Cliente cliente, Compra compra, ArrayList<Producto> productos){
@@ -38,15 +43,15 @@ public abstract class DaoCliente {
             });
 
         //V2
-        db.darDaoCompra()
-            .darCompraPorFecha(compra.getFecha())
-            .flatMapCompletable(compraBuscada ->{
-                return Completable.fromAction(() -> {
-                    db.darDaoCompraProducto()
-                        .agregarCompraProductos(crearCompraProductosPorCodigoCompra(compraBuscada.getCodigo(), productos));
-                });
-            }).subscribe();
-        db.darDaoProducto().actualizarProductos(productos.toArray(new Producto[productos.size()]));
+//        db.darDaoCompra()
+//            .darCompraPorFecha(compra.getFecha())
+//            .flatMapCompletable(compraBuscada ->{
+//                return Completable.fromAction(() -> {
+//                    db.darDaoCompraProducto()
+//                        .agregarCompraProductos(crearCompraProductosPorCodigoCompra(compraBuscada.getCodigo(), productos));
+//                });
+//            }).subscribe();
+//        db.darDaoProducto().actualizarProductos(productos.toArray(new Producto[productos.size()]));
 
         //Con la compra consultado agrego los CompraProductos
         //actualizo los productos
